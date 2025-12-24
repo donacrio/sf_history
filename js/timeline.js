@@ -1,113 +1,188 @@
 /**
- * Timeline Rendering Module
- * Handles rendering of the timeline visualization
+ * Timeline Rendering Module - Horizontal Layout
+ * Renders movements as horizontal bars with time axis
  */
 
 import { findMovementById } from './config.js';
+import { parsePeriod, getYearRange, assignLanes, generateDecades, yearToPosition } from './utils.js';
+
+let currentSelection = null;
+let yearRange = { minYear: 1800, maxYear: 2030 };
 
 /**
- * Renders the complete timeline
+ * Renders the complete horizontal timeline
  * @param {Array} movements - Array of movement objects
  */
 export function renderTimeline(movements) {
-  const timeline = document.getElementById('timeline');
+  const container = document.getElementById('timeline');
+  container.innerHTML = '';
 
-  // Clear existing content
-  timeline.innerHTML = '';
+  // Assign lanes to prevent overlaps
+  const movementsWithLanes = assignLanes(movements);
 
-  // Add SVG canvas for connections
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'connections');
-  timeline.appendChild(svg);
+  // Get year range
+  yearRange = getYearRange(movements);
 
-  // Render each movement
-  movements.forEach((movement, index) => {
-    const movementElement = createMovementElement(movement, index);
-    timeline.appendChild(movementElement);
-  });
+  // Create layout: visualization (left) + details sidebar (right)
+  container.innerHTML = `
+    <div class="timeline-visualization">
+      <div class="time-axis" id="time-axis"></div>
+      <svg class="connections" id="connections-svg"></svg>
+      <div class="movements-bars" id="movements-bars"></div>
+    </div>
+    <div class="details-sidebar empty" id="details-sidebar">
+      <p>Cliquez sur un courant pour voir ses détails</p>
+    </div>
+  `;
 
-  // Draw connections after DOM is ready
+  // Render time axis with decades
+  renderTimeAxis();
+
+  // Render movement bars
+  renderMovementBars(movementsWithLanes);
+
+  // Draw connections
   setTimeout(() => drawConnections(movements), 100);
-
-  // Redraw on window resize
-  window.addEventListener('resize', () => drawConnections(movements));
 }
 
 /**
- * Creates a movement DOM element
- * @param {Object} movement - Movement data
- * @param {number} index - Index in the timeline
- * @returns {HTMLElement} Movement element
+ * Renders the time axis with decade markers
  */
-function createMovementElement(movement, index) {
-  const isLeft = index % 2 === 0;
-  const movementDiv = document.createElement('div');
-  movementDiv.className = `movement ${isLeft ? 'left' : 'right'}`;
+function renderTimeAxis() {
+  const timeAxis = document.getElementById('time-axis');
+  const decades = generateDecades(yearRange.minYear, yearRange.maxYear);
+
+  decades.forEach(decade => {
+    const position = yearToPosition(decade, yearRange.minYear, yearRange.maxYear);
+    const marker = document.createElement('div');
+    marker.className = 'decade-marker';
+    marker.style.left = `${position}%`;
+    marker.innerHTML = `
+      <div class="decade-line"></div>
+      <div class="decade-label">${decade}</div>
+    `;
+    timeAxis.appendChild(marker);
+  });
+}
+
+/**
+ * Renders movement bars
+ * @param {Array} movements - Movements with lane assignments
+ */
+function renderMovementBars(movements) {
+  const barsContainer = document.getElementById('movements-bars');
+  const laneHeight = 50; // Height of each lane (bar + spacing)
+  const barHeight = 40; // Height of the bar itself
+
+  // Calculate container height based on number of lanes
+  const maxLane = Math.max(...movements.map(m => m.lane || 0));
+  barsContainer.style.height = `${(maxLane + 1) * laneHeight + 20}px`;
+
+  movements.forEach(movement => {
+    const { start, end } = parsePeriod(movement.period);
+    const startPos = yearToPosition(start, yearRange.minYear, yearRange.maxYear);
+    const endPos = yearToPosition(end, yearRange.minYear, yearRange.maxYear);
+    const width = endPos - startPos;
+
+    const bar = document.createElement('div');
+    bar.className = 'movement-bar';
+    bar.dataset.id = movement.id;
+    bar.style.left = `${startPos}%`;
+    bar.style.width = `${width}%`;
+    bar.style.top = `${movement.lane * laneHeight}px`;
+
+    bar.innerHTML = `
+      <div class="movement-bar-content">
+        <div class="movement-bar-title">${movement.title}</div>
+        <div class="movement-bar-period">${movement.period}</div>
+      </div>
+    `;
+
+    barsContainer.appendChild(bar);
+  });
+}
+
+/**
+ * Shows movement details in the sidebar
+ * @param {string} movementId - Movement ID to display
+ */
+export function showMovementDetails(movementId) {
+  const movement = findMovementById(movementId);
+  if (!movement) return;
+
+  currentSelection = movementId;
+
+  // Update bar selection states
+  document.querySelectorAll('.movement-bar').forEach(bar => {
+    if (bar.dataset.id === movementId) {
+      bar.classList.add('selected');
+    } else {
+      bar.classList.remove('selected');
+    }
+  });
+
+  const sidebar = document.getElementById('details-sidebar');
+  sidebar.classList.remove('empty');
 
   // Count authors by gender
   const maleAuthors = movement.authors.filter(a => a.gender === 'M');
   const femaleAuthors = movement.authors.filter(a => a.gender === 'F');
 
-  // Build HTML
-  movementDiv.innerHTML = `
-    <div class="timeline-dot" style="top: 50px;"></div>
-    <div class="movement-card" data-id="${movement.id}">
-      <div class="movement-title">
-        ${movement.title}
-        <span class="period">${movement.period}</span>
-        <span class="expand-icon">▼</span>
-      </div>
-      <div class="description">${movement.description}</div>
+  sidebar.innerHTML = `
+    <div class="sidebar-title">${movement.title}</div>
+    <div class="sidebar-period">${movement.period}</div>
+    <div class="sidebar-description">${movement.description}</div>
 
-      <div class="details">
-        <div class="section-title">👥 Auteur·ice·s majeur·e·s (${femaleAuthors.length}♀ / ${maleAuthors.length}♂)</div>
-        <div class="authors">
-          ${movement.authors.map(author => `
-            <div class="author ${author.gender === 'F' ? 'female' : ''} ${author.favorite ? 'favorite' : ''}">
-              ${author.name} ${author.gender === 'F' ? '♀' : '♂'}
-            </div>
-          `).join('')}
+    <div class="section-title">👥 Auteur·ice·s majeur·e·s (${femaleAuthors.length}♀ / ${maleAuthors.length}♂)</div>
+    <div class="authors">
+      ${movement.authors.map(author => `
+        <div class="author ${author.gender === 'F' ? 'female' : ''} ${author.favorite ? 'favorite' : ''}">
+          ${author.name} ${author.gender === 'F' ? '♀' : '♂'}
         </div>
-
-        <div class="section-title">📚 Œuvres marquantes</div>
-        <div class="works">
-          ${movement.works.map(work => `
-            <div class="work">${work}</div>
-          `).join('')}
-        </div>
-
-        ${movement.context ? `
-          <div class="section-title">🌍 Contexte & Enjeux</div>
-          <div class="context-section">
-            <div class="context-item">
-              <div class="context-label">📅 Contexte historique</div>
-              <div class="context-text">${movement.context.historical}</div>
-            </div>
-            <div class="context-item">
-              <div class="context-label">🤔 Questions philosophiques</div>
-              <div class="context-text">${movement.context.philosophical}</div>
-            </div>
-            <div class="context-item">
-              <div class="context-label">✍️ Innovations littéraires</div>
-              <div class="context-text">${movement.context.literary}</div>
-            </div>
-            <div class="context-item">
-              <div class="context-label">🔬 Concepts scientifiques</div>
-              <div class="context-text">${movement.context.scientific}</div>
-            </div>
-            <div class="context-item">
-              <div class="context-label">💭 Thèmes récurrents</div>
-              <div class="context-text">${movement.context.themes}</div>
-            </div>
-          </div>
-        ` : ''}
-
-        ${renderConnectionsSection(movement)}
-      </div>
+      `).join('')}
     </div>
+
+    <div class="section-title">📚 Œuvres marquantes</div>
+    <div class="works">
+      ${movement.works.map(work => `
+        <div class="work">${work}</div>
+      `).join('')}
+    </div>
+
+    ${movement.context ? `
+      <div class="section-title">🌍 Contexte & Enjeux</div>
+      <div class="context-section">
+        <div class="context-item">
+          <div class="context-label">📅 Contexte historique</div>
+          <div class="context-text">${movement.context.historical}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">🤔 Questions philosophiques</div>
+          <div class="context-text">${movement.context.philosophical}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">✍️ Innovations littéraires</div>
+          <div class="context-text">${movement.context.literary}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">🔬 Concepts scientifiques</div>
+          <div class="context-text">${movement.context.scientific}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">💭 Thèmes récurrents</div>
+          <div class="context-text">${movement.context.themes}</div>
+        </div>
+      </div>
+    ` : ''}
+
+    ${renderConnectionsSection(movement)}
   `;
 
-  return movementDiv;
+  // Redraw connections to highlight
+  const movements = Array.from(document.querySelectorAll('.movement-bar')).map(bar =>
+    findMovementById(bar.dataset.id)
+  ).filter(Boolean);
+  drawConnections(movements);
 }
 
 /**
@@ -166,62 +241,97 @@ function renderConnectionsSection(movement) {
  * @param {Array} movements - Array of movement objects
  */
 export function drawConnections(movements) {
-  const svg = document.querySelector('svg.connections');
+  const svg = document.getElementById('connections-svg');
   if (!svg) return;
 
   svg.innerHTML = '';
 
   movements.forEach(movement => {
-    const fromPos = getMovementPosition(movement.id);
-    if (!fromPos) return;
+    if (!movement.connections) return;
 
-    if (movement.connections) {
-      Object.entries(movement.connections).forEach(([type, connections]) => {
-        if (connections) {
-          connections.forEach(conn => {
-            const toPos = getMovementPosition(conn.to);
-            if (!toPos) return;
+    Object.entries(movement.connections).forEach(([type, connections]) => {
+      if (connections) {
+        connections.forEach(conn => {
+          const fromBar = document.querySelector(`[data-id="${movement.id}"]`);
+          const toBar = document.querySelector(`[data-id="${conn.to}"]`);
 
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          if (!fromBar || !toBar) return;
 
-            // Bézier curve for elegant connection
-            const controlX1 = fromPos.x + (toPos.x - fromPos.x) * 0.3;
-            const controlY1 = fromPos.y;
-            const controlX2 = fromPos.x + (toPos.x - fromPos.x) * 0.7;
-            const controlY2 = toPos.y;
+          const fromRect = fromBar.getBoundingClientRect();
+          const toRect = toBar.getBoundingClientRect();
+          const containerRect = svg.parentElement.getBoundingClientRect();
 
-            const d = `M ${fromPos.x} ${fromPos.y} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${toPos.x} ${toPos.y}`;
+          // Calculate connection points (from right edge of from-bar to left edge of to-bar)
+          const fromX = fromRect.right - containerRect.left;
+          const fromY = fromRect.top + fromRect.height / 2 - containerRect.top;
+          const toX = toRect.left - containerRect.left;
+          const toY = toRect.top + toRect.height / 2 - containerRect.top;
 
-            path.setAttribute('d', d);
-            path.setAttribute('class', `connection-line ${type}`);
-            path.setAttribute('data-from', movement.id);
-            path.setAttribute('data-to', conn.to);
+          // Create curved arrow path
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-            svg.appendChild(path);
-          });
-        }
-      });
-    }
+          // Bezier curve with proper control points
+          const controlX1 = fromX + (toX - fromX) * 0.3;
+          const controlY1 = fromY;
+          const controlX2 = fromX + (toX - fromX) * 0.7;
+          const controlY2 = toY;
+
+          const d = `M ${fromX} ${fromY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${toX} ${toY}`;
+
+          path.setAttribute('d', d);
+          path.setAttribute('class', `connection-line ${type}`);
+          path.setAttribute('data-from', movement.id);
+          path.setAttribute('data-to', conn.to);
+
+          // Highlight if connected to current selection
+          if (currentSelection && (movement.id === currentSelection || conn.to === currentSelection)) {
+            path.classList.add('active');
+          }
+
+          svg.appendChild(path);
+
+          // Add arrowhead marker
+          addArrowhead(svg, toX, toY, Math.atan2(toY - controlY2, toX - controlX2), type);
+        });
+      }
+    });
   });
 }
 
 /**
- * Gets the position of a movement card
- * @param {string} id - Movement ID
- * @returns {Object|null} Position {x, y} or null
+ * Adds an arrowhead to the SVG
+ * @param {SVGElement} svg - SVG element
+ * @param {number} x - X position
+ * @param {number} y - Y position
+ * @param {number} angle - Angle in radians
+ * @param {string} type - Connection type for styling
  */
-function getMovementPosition(id) {
-  const card = document.querySelector(`[data-id="${id}"]`);
-  if (!card) return null;
+function addArrowhead(svg, x, y, angle, type) {
+  const arrowSize = 8;
+  const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
-  const rect = card.getBoundingClientRect();
-  const container = document.querySelector('.timeline-container');
-  const containerRect = container.getBoundingClientRect();
+  // Calculate arrowhead points
+  const point1X = x;
+  const point1Y = y;
+  const point2X = x - arrowSize * Math.cos(angle - Math.PI / 6);
+  const point2Y = y - arrowSize * Math.sin(angle - Math.PI / 6);
+  const point3X = x - arrowSize * Math.cos(angle + Math.PI / 6);
+  const point3Y = y - arrowSize * Math.sin(angle + Math.PI / 6);
 
-  return {
-    x: rect.left + rect.width / 2 - containerRect.left,
-    y: rect.top + rect.height / 2 - containerRect.top + container.scrollTop
+  polygon.setAttribute('points', `${point1X},${point1Y} ${point2X},${point2Y} ${point3X},${point3Y}`);
+  polygon.setAttribute('class', `connection-arrowhead ${type}`);
+
+  // Match the line color
+  const colors = {
+    influence: '#00d4ff',
+    reaction: '#ff6b00',
+    evolution: '#00ff88',
+    related: '#ff00ff'
   };
+  polygon.setAttribute('fill', colors[type] || '#00d4ff');
+  polygon.style.opacity = currentSelection ? '0.8' : '0.3';
+
+  svg.appendChild(polygon);
 }
 
 /**
@@ -231,28 +341,48 @@ function getMovementPosition(id) {
  */
 export function highlightConnections(movementId, highlight) {
   const lines = document.querySelectorAll('.connection-line');
+  const bars = document.querySelectorAll('.movement-bar');
 
-  lines.forEach(line => {
-    const from = line.getAttribute('data-from');
-    const to = line.getAttribute('data-to');
+  if (highlight) {
+    // Highlight connected bars and lines
+    lines.forEach(line => {
+      const from = line.getAttribute('data-from');
+      const to = line.getAttribute('data-to');
 
-    if (from === movementId || to === movementId) {
-      if (highlight) {
+      if (from === movementId || to === movementId) {
         line.classList.add('active');
-        // Highlight connected cards
         const connectedId = from === movementId ? to : from;
-        const connectedCard = document.querySelector(`[data-id="${connectedId}"]`);
-        if (connectedCard) {
-          connectedCard.classList.add('highlighted');
-        }
-      } else {
-        line.classList.remove('active');
-        const connectedId = from === movementId ? to : from;
-        const connectedCard = document.querySelector(`[data-id="${connectedId}"]`);
-        if (connectedCard) {
-          connectedCard.classList.remove('highlighted');
+        const connectedBar = document.querySelector(`[data-id="${connectedId}"]`);
+        if (connectedBar) {
+          connectedBar.classList.add('highlighted');
         }
       }
-    }
-  });
+    });
+  } else {
+    // Remove highlight unless it's the current selection
+    lines.forEach(line => {
+      const from = line.getAttribute('data-from');
+      const to = line.getAttribute('data-to');
+
+      if (from === movementId || to === movementId) {
+        if (!currentSelection || (from !== currentSelection && to !== currentSelection)) {
+          line.classList.remove('active');
+        }
+      }
+    });
+
+    bars.forEach(bar => {
+      if (bar.dataset.id !== currentSelection) {
+        bar.classList.remove('highlighted');
+      }
+    });
+  }
+}
+
+/**
+ * Gets the current selection
+ * @returns {string|null} Current movement ID or null
+ */
+export function getCurrentSelection() {
+  return currentSelection;
 }

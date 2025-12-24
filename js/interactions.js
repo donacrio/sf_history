@@ -1,53 +1,57 @@
 /**
- * Interactions Module
- * Handles user interactions and event listeners
+ * Interactions Module - Horizontal Timeline
+ * Handles user interactions and event listeners for horizontal layout
  */
 
-import { highlightConnections, drawConnections } from './timeline.js';
+import { highlightConnections, drawConnections, showMovementDetails } from './timeline.js';
 import { getMovements } from './config.js';
 
 /**
  * Sets up all event listeners for user interactions
  */
 export function setupInteractions() {
-  setupCardInteractions();
+  setupBarInteractions();
   setupConnectionClicks();
   setupWindowResize();
 }
 
 /**
- * Sets up click and hover interactions for movement cards
+ * Sets up click and hover interactions for movement bars
  */
-function setupCardInteractions() {
-  // Use event delegation for dynamically created elements
+function setupBarInteractions() {
   const timeline = document.getElementById('timeline');
 
+  // Click on bar to show details in sidebar
   timeline.addEventListener('click', (event) => {
-    const card = event.target.closest('.movement-card');
-    if (card && !event.target.closest('.connection-link')) {
-      toggleDetails(card);
+    const bar = event.target.closest('.movement-bar');
+    if (bar && !event.target.closest('.connection-link')) {
+      const movementId = bar.getAttribute('data-id');
+      if (movementId) {
+        showMovementDetails(movementId);
+      }
     }
   });
 
+  // Hover to highlight connections
   timeline.addEventListener('mouseenter', (event) => {
-    const card = event.target.closest('.movement-card');
-    if (card) {
-      const movementId = card.getAttribute('data-id');
+    const bar = event.target.closest('.movement-bar');
+    if (bar) {
+      const movementId = bar.getAttribute('data-id');
       highlightConnections(movementId, true);
     }
   }, true);
 
   timeline.addEventListener('mouseleave', (event) => {
-    const card = event.target.closest('.movement-card');
-    if (card) {
-      const movementId = card.getAttribute('data-id');
+    const bar = event.target.closest('.movement-bar');
+    if (bar) {
+      const movementId = bar.getAttribute('data-id');
       highlightConnections(movementId, false);
     }
   }, true);
 }
 
 /**
- * Sets up click interactions for connection links
+ * Sets up click interactions for connection links in sidebar
  */
 function setupConnectionClicks() {
   const timeline = document.getElementById('timeline');
@@ -58,7 +62,9 @@ function setupConnectionClicks() {
       event.stopPropagation();
       const targetId = link.getAttribute('data-target');
       if (targetId) {
-        scrollToMovement(targetId);
+        // Scroll to the movement bar and show its details
+        scrollToMovementBar(targetId);
+        showMovementDetails(targetId);
       }
     }
   });
@@ -79,55 +85,28 @@ function setupWindowResize() {
 }
 
 /**
- * Toggles the expanded state of a movement card
- * @param {HTMLElement} card - The movement card element
- */
-function toggleDetails(card) {
-  const details = card.querySelector('.details');
-  const isExpanded = details.classList.contains('show');
-
-  // Close all other cards
-  document.querySelectorAll('.details.show').forEach(d => {
-    d.classList.remove('show');
-    d.parentElement.classList.remove('expanded');
-  });
-
-  // Toggle this card
-  if (!isExpanded) {
-    details.classList.add('show');
-    card.classList.add('expanded');
-
-    // Redraw connections after expansion animation
-    setTimeout(() => {
-      const movements = getMovements();
-      drawConnections(movements);
-    }, 300);
-  }
-}
-
-/**
- * Scrolls to a specific movement and highlights it
+ * Scrolls to a specific movement bar and highlights it
  * @param {string} id - Movement ID to scroll to
  */
-export function scrollToMovement(id) {
-  const card = document.querySelector(`[data-id="${id}"]`);
-  if (!card) {
+export function scrollToMovementBar(id) {
+  const bar = document.querySelector(`[data-id="${id}"]`);
+  if (!bar) {
     console.warn(`Movement with ID '${id}' not found`);
     return;
   }
 
-  // Scroll to card
-  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Scroll the visualization container to bring bar into view
+  const visualizationContainer = document.querySelector('.timeline-visualization');
+  const barRect = bar.getBoundingClientRect();
+  const containerRect = visualizationContainer.getBoundingClientRect();
 
-  // Expand if not already expanded
-  const details = card.querySelector('.details');
-  if (!details.classList.contains('show')) {
-    toggleDetails(card);
-  }
+  // Calculate scroll position (horizontal scroll)
+  const scrollLeft = bar.offsetLeft - containerRect.width / 2 + bar.offsetWidth / 2;
+  visualizationContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
 
   // Flash effect
-  card.style.animation = 'flash 1s ease';
+  bar.style.animation = 'flash 1s ease';
   setTimeout(() => {
-    card.style.animation = '';
+    bar.style.animation = '';
   }, 1000);
 }

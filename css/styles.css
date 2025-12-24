@@ -121,26 +121,168 @@ h1 {
     text-align: center;
 }
 
-/* Timeline Structure
+/* Timeline Structure - Horizontal Layout
    -------------------------------------------- */
 .timeline-container {
     position: relative;
-    max-width: 1400px;
+    display: flex;
+    gap: 20px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 20px;
+    min-height: 600px;
 }
 
-.timeline-line {
+/* Timeline visualization area (left side) */
+.timeline-visualization {
+    flex: 1;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 40px 20px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+/* Time axis */
+.time-axis {
+    position: relative;
+    height: 40px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #00d4ff;
+}
+
+.decade-marker {
     position: absolute;
-    left: 50%;
-    top: 0;
     bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, #00d4ff, #ff00ff);
     transform: translateX(-50%);
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.decade-line {
+    width: 2px;
+    height: 15px;
+    background: #00d4ff;
+    margin-bottom: 5px;
+}
+
+.decade-label {
+    font-size: 0.85em;
+    color: #00d4ff;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+/* Movement bars container */
+.movements-bars {
+    position: relative;
+    min-height: 400px;
+}
+
+.movement-bar {
+    position: absolute;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.4), rgba(255, 0, 255, 0.3));
+    border: 2px solid #00d4ff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+}
+
+.movement-bar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.6);
+    border-color: #ff00ff;
+    z-index: 50;
+}
+
+.movement-bar.selected {
+    border-color: #ff00ff;
+    border-width: 3px;
+    box-shadow: 0 4px 20px rgba(255, 0, 255, 0.8);
+    z-index: 100;
+}
+
+.movement-bar.highlighted {
+    border-color: #ffff00;
+    box-shadow: 0 4px 16px rgba(255, 255, 0, 0.6);
+}
+
+.movement-bar-content {
+    padding: 8px 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.movement-bar-title {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.movement-bar-period {
+    font-size: 0.75em;
+    color: #aaa;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Details Sidebar (right side)
+   -------------------------------------------- */
+.details-sidebar {
+    width: 400px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: rgba(26, 26, 46, 0.95);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+}
+
+.details-sidebar.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-style: italic;
+    text-align: center;
+}
+
+.sidebar-title {
+    font-size: 1.6em;
+    color: #00d4ff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.sidebar-period {
+    font-size: 1em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.sidebar-description {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* SVG Connections for horizontal layout */
 svg.connections {
     position: absolute;
     top: 0;
@@ -180,102 +322,8 @@ svg.connections {
     stroke: #ff00ff;
 }
 
-/* Movement Cards
+/* Details Content (used in sidebar)
    -------------------------------------------- */
-.movement {
-    position: relative;
-    margin: 40px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
-    z-index: 10;
-}
-
-.movement.left {
-    flex-direction: row-reverse;
-}
-
-.movement-card {
-    flex: 1;
-    background: rgba(26, 26, 46, 0.95);
-    border: 2px solid #00d4ff;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    max-width: 600px;
-    position: relative;
-}
-
-.movement.left .movement-card {
-    margin-left: auto;
-}
-
-.movement.right .movement-card {
-    margin-right: auto;
-}
-
-.movement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 212, 255, 0.4);
-    border-color: #ff00ff;
-}
-
-.movement-card.expanded {
-    border-color: #ff00ff;
-}
-
-.movement-card.highlighted {
-    border-color: #ffff00;
-    box-shadow: 0 8px 32px rgba(255, 255, 0, 0.4);
-}
-
-.timeline-dot {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    background: #00d4ff;
-    border: 4px solid #1a1a2e;
-    border-radius: 50%;
-    z-index: 10;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-}
-
-/* Movement Card Content
-   -------------------------------------------- */
-.movement-title {
-    font-size: 1.8em;
-    color: #00d4ff;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.period {
-    font-size: 0.5em;
-    color: #888;
-    font-weight: normal;
-}
-
-.description {
-    color: #b0b0b0;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-}
-
-.details.show {
-    max-height: 6000px;
-}
 
 .section-title {
     color: #ff00ff;
@@ -575,33 +623,55 @@ svg.connections {
     50% { border-color: #ffff00; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
 }
 
+/* UI Elements
+   -------------------------------------------- */
+.expand-icon {
+    display: none; /* Not used in horizontal layout */
+}
+
 /* Responsive Design
    -------------------------------------------- */
 @media (max-width: 1200px) {
-    .timeline-line {
-        display: none;
+    .timeline-container {
+        flex-direction: column;
     }
 
-    svg.connections {
-        display: none;
+    .details-sidebar {
+        width: 100%;
+        max-height: none;
+        position: static;
+        order: -1; /* Show sidebar at top on mobile */
     }
 
-    .movement {
-        flex-direction: column !important;
+    .timeline-visualization {
+        overflow-x: auto;
     }
 
-    .movement-card {
-        margin: 0 auto !important;
-        max-width: 100%;
-    }
-
-    .timeline-dot {
-        display: none;
+    .movement-bar-title {
+        font-size: 0.8em;
     }
 
     .legend {
         position: static;
         margin: 20px auto;
         max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .movement-bar {
+        height: 35px;
+    }
+
+    .movement-bar-title {
+        font-size: 0.75em;
+    }
+
+    .details-sidebar {
+        padding: 15px;
     }
 }
