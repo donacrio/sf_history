@@ -2,7 +2,8 @@
   "metadata": {
     "title": "Fresque des Courants de la Science-Fiction",
     "subtitle": "Cliquez sur chaque courant pour découvrir ses auteurs et œuvres",
-    "version": "1.0.0"
+    "version": "2.0.0",
+    "last_updated": "2025-12-24"
   },
   "movements": [
     {
@@ -13,19 +14,20 @@
       "description": "Les précurseurs de la SF moderne, mélangeant aventure, anticipation scientifique et questionnements philosophiques sur le progrès.",
       "context": {
         "historical": "Révolution industrielle, découvertes scientifiques majeures (électricité, évolution darwinienne), colonialisme européen, émergence de la bourgeoisie. C'est l'ère de l'optimisme scientifique mais aussi des premières angoisses face au progrès technique.",
-        "philosophical": "Jusqu'où l'humain peut-il jouer à Dieu ? Quelle est la nature de la vie et de la conscience ? Le progrès scientifique est-il synonyme de progrès moral ? Comment la technologie transforme-t-elle notre rapport au temps et à l'espace ?",
-        "literary": "Naissance du roman d'aventure scientifique. Mélange de réalisme documentaire et d'extrapolation imaginative. Style gothique chez Shelley, scientisme encyclopédique chez Verne, pessimisme visionnaire chez Wells.",
-        "scientific": "Galvanisme et électricité (Frankenstein), exploration des océans et du centre de la Terre, machines volantes, voyage dans le temps, biologie extraterrestre, eugénisme.",
-        "themes": "La hubris scientifique, le créateur face à sa création, l'exploration comme conquête, les conséquences imprévues du progrès, la solitude du génie."
+        "themes": "La hubris scientifique, le créateur face à sa création, l'exploration comme conquête, les conséquences imprévues du progrès, la solitude du génie.",
+        "questionnements": "Jusqu'où l'humain peut-il jouer à Dieu ? Quelle est la nature de la vie et de la conscience ? Le progrès scientifique est-il synonyme de progrès moral ? Comment la technologie transforme-t-elle notre rapport au temps et à l'espace ? La science peut-elle échapper à son créateur ?",
+        "scientific": "Galvanisme et électricité (Frankenstein), exploration des océans et du centre de la Terre, machines volantes, voyage dans le temps, biologie extraterrestre, eugénisme, invisibilité.",
+        "literary": "Naissance du roman d'aventure scientifique. Mélange de réalisme documentaire et d'extrapolation imaginative. Style gothique chez Shelley, scientisme encyclopédique chez Verne, pessimisme visionnaire chez Wells. Création du sense of wonder."
       },
       "authors": [
-        { "name": "Mary Shelley", "gender": "F" },
+        { "name": "Mary Shelley", "gender": "F", "favorite": true },
         { "name": "Jules Verne", "gender": "M" },
         { "name": "H.G. Wells", "gender": "M" },
         { "name": "Edgar Allan Poe", "gender": "M" }
       ],
       "works": [
-        "Frankenstein (Shelley, 1818)",
+        "Frankenstein ou le Prométhée moderne (Shelley, 1818)",
+        "Les Derniers et les Premiers (Stapledon, 1930)",
         "Vingt mille lieues sous les mers (Verne, 1870)",
         "La Machine à explorer le temps (Wells, 1895)",
         "La Guerre des mondes (Wells, 1898)"
@@ -38,38 +40,81 @@
       }
     },
     {
+      "id": "planetary-romance",
+      "title": "Planetary Romance",
+      "period": "1912-1965",
+      "year": 1940,
+      "description": "Romans d'aventures exotiques sur d'autres planètes, mélangeant science-fiction et fantasy, avec des héros explorant des mondes étranges et dangereux.",
+      "context": {
+        "historical": "Âge d'or des pulps, fascination pour Mars et Vénus avant les sondes spatiales, colonialisme et imaginaire d'exploration, entre-deux-guerres.",
+        "themes": "L'aventure sur des mondes exotiques, le héros solitaire face à des civilisations alien
+
+es, romance interplanétaire, choc des cultures, l'Autre comme miroir de nous-mêmes.",
+        "questionnements": "Que trouverons-nous sur d'autres planètes ? Comment l'humanité réagirait-elle face à des civilisations radicalement différentes ? Le colonialisme spatial est-il inévitable ? Peut-on aimer quelqu'un de fondamentalement différent ?",
+        "scientific": "Canaux de Mars, atmosphères planétaires respirables (avant découverte de la réalité), voyages spatiaux rudimentaires, biologies alternatives, planètes mourantes.",
+        "literary": "Influence du roman d'aventures coloniales et du roman de cape et d'épée. Style pulp coloré et exotique. Worldbuilding imaginatif sans contrainte de réalisme scientifique. Héros d'action dans des décors fantastiques."
+      },
+      "authors": [
+        { "name": "Edgar Rice Burroughs", "gender": "M" },
+        { "name": "Leigh Brackett", "gender": "F", "favorite": true },
+        { "name": "C.L. Moore", "gender": "F" },
+        { "name": "Jack Vance", "gender": "M", "favorite": true },
+        { "name": "Andre Norton", "gender": "F" }
+      ],
+      "works": [
+        "Une princesse de Mars (Burroughs, 1912)",
+        "Les Guerrières de Mars (Brackett, 1949)",
+        "Le Cycle d'Alastor (Vance, 1973-1978)",
+        "La Terre mourante (Vance, 1950)",
+        "Northwest Smith (Moore, 1933-1940)"
+      ],
+      "connections": {
+        "evolution": [
+          { "to": "pulp-sf", "desc": "Fondations du space opera pulp" }
+        ],
+        "influence": [
+          { "to": "space-opera", "desc": "Héritage de l'aventure planétaire" }
+        ]
+      }
+    },
+    {
       "id": "pulp-sf",
       "title": "Pulp SF / Âge d'or",
       "period": "1920-1960",
-      "year": 1940,
+      "year": 1945,
       "description": "L'essor des magazines pulp américains, avec des récits d'aventures spatiales, de robots et d'empires galactiques. Émergence des 'Trois Grands' et de figures féminines pionnières.",
       "context": {
         "historical": "Entre-deux-guerres, Grande Dépression, Seconde Guerre mondiale, début de la Guerre froide, course spatiale. Montée du fascisme puis du maccarthysme. Essor de la culture de masse américaine et des magazines populaires.",
-        "philosophical": "L'humanité peut-elle se gouverner elle-même à l'échelle galactique ? Quelle éthique pour les intelligences artificielles ? Comment préserver l'humanité dans l'immensité cosmique ? Les lois de la robotique d'Asimov comme cadre moral.",
-        "literary": "Naissance de la SF comme genre codifié. Structure en feuilleton. Worldbuilding systématique. Invention du space opera. Style direct, orienté action. Les magazines comme Amazing Stories et Astounding créent une communauté de lecteurs.",
-        "scientific": "Conquête spatiale (avant même Spoutnik), physique nucléaire, cybernétique naissante, psychohistoire (fusion mathématiques/sociologie), robotique, voyages supraluminiques.",
-        "themes": "L'expansion humaine dans le cosmos, l'empire galactique comme métaphore géopolitique, la raison et la science comme solutions aux conflits, l'optimisme technologique, le 'sense of wonder'."
+        "themes": "L'expansion humaine dans le cosmos, l'empire galactique comme métaphore géopolitique, la raison et la science comme solutions aux conflits, l'optimisme technologique, le sense of wonder.",
+        "questionnements": "L'humanité peut-elle se gouverner elle-même à l'échelle galactique ? Quelle éthique pour les intelligences artificielles ? Comment préserver l'humanité dans l'immensité cosmique ? Les mathématiques peuvent-elles prédire l'avenir ? Sommes-nous seuls dans l'univers ?",
+        "scientific": "Conquête spatiale (avant même Spoutnik), physique nucléaire, cybernétique naissante, psychohistoire (fusion mathématiques/sociologie), robotique et Trois Lois, voyages supraluminiques, colonies spatiales.",
+        "literary": "Naissance de la SF comme genre codifié. Structure en feuilleton. Worldbuilding systématique. Invention du space opera. Style direct, orienté action. Les magazines comme Amazing Stories et Astounding créent une communauté de lecteurs."
       },
       "authors": [
         { "name": "Isaac Asimov", "gender": "M", "favorite": true },
         { "name": "Robert A. Heinlein", "gender": "M" },
         { "name": "Arthur C. Clarke", "gender": "M" },
         { "name": "Jack Vance", "gender": "M", "favorite": true },
-        { "name": "Leigh Brackett", "gender": "F" },
+        { "name": "Leigh Brackett", "gender": "F", "favorite": true },
         { "name": "C.L. Moore", "gender": "F" },
-        { "name": "Andre Norton", "gender": "F" }
+        { "name": "Andre Norton", "gender": "F" },
+        { "name": "Judith Merril", "gender": "F" }
       ],
       "works": [
-        "Fondation (Asimov, 1951)",
+        "Le Cycle de Fondation (Asimov, 1951-1993)",
+        "Le Cycle des Robots (Asimov, 1950-1985)",
         "Étoiles, garde-à-vous ! (Heinlein, 1959)",
         "Les Guerrières de Mars (Brackett, 1949)",
-        "La Geste des Princes-Démons (Vance, 1950s)",
+        "La Geste des Princes-Démons (Vance, 1966-1967)",
         "Shambleau (Moore, 1933)"
       ],
       "connections": {
         "influence": [
           { "to": "hard-sf", "desc": "Base du space opera et de la hard SF moderne" },
           { "to": "space-opera", "desc": "Fondements narratifs du space opera" }
+        ],
+        "evolution": [
+          { "to": "planetary-romance", "desc": "Sophistication narrative des aventures spatiales" }
         ]
       }
     },
@@ -80,23 +125,26 @@
       "year": 1945,
       "description": "Exploration des sociétés totalitaires et des dérives du pouvoir, souvent en réaction aux régimes autoritaires du XXe siècle.",
       "context": {
-        "historical": "Montée du totalitarisme (nazisme, stalinisme, fascisme), propagande d'État, Seconde Guerre mondiale, début de la société de consommation, conformisme des années 50, première bombe atomique.",
-        "philosophical": "Comment les systèmes de pouvoir aliènent-ils l'individu ? Le bonheur collectif justifie-t-il le sacrifice de la liberté ? Peut-on contrôler totalement une population ? Quelle est la nature de la vérité dans une société totalitaire ?",
-        "literary": "Satire politique aiguisée. Création de langues artificielles (novlangue). Utilisation de l'ironie et du détournement. Influence du roman russe et de la critique sociale britannique.",
-        "scientific": "Ingénierie sociale, eugénisme, conditionnement psychologique, surveillance technologique, contrôle par la drogue (soma), manipulation génétique.",
-        "themes": "Big Brother et surveillance totale, réécriture de l'histoire, contrôle de la pensée et du langage, sacrifice de l'art et de la culture, résistance individuelle face au système."
+        "historical": "Montée du totalitarisme (nazisme, stalinisme, fascisme), propagande d'État, Seconde Guerre mondiale, début de la société de consommation, conformisme des années 50, première bombe atomique, Guerre froide.",
+        "themes": "Big Brother et surveillance totale, réécriture de l'histoire, contrôle de la pensée et du langage, sacrifice de l'art et de la culture, résistance individuelle face au système, conformisme social.",
+        "questionnements": "Comment les systèmes de pouvoir aliènent-ils l'individu ? Le bonheur collectif justifie-t-il le sacrifice de la liberté ? Peut-on contrôler totalement une population ? Quelle est la nature de la vérité dans une société totalitaire ? La technologie renforce-t-elle le contrôle social ?",
+        "scientific": "Ingénierie sociale, eugénisme, conditionnement psychologique, surveillance technologique, contrôle par la drogue (soma), manipulation génétique, propagande scientifique.",
+        "literary": "Satire politique aiguisée. Création de langues artificielles (novlangue). Utilisation de l'ironie et du détournement. Influence du roman russe et de la critique sociale britannique. Narrateur souvent victime du système."
       },
       "authors": [
         { "name": "Evgueni Zamiatine", "gender": "M" },
-        { "name": "Aldous Huxley", "gender": "M" },
-        { "name": "George Orwell", "gender": "M" },
-        { "name": "Ray Bradbury", "gender": "M" }
+        { "name": "Aldous Huxley", "gender": "M", "favorite": true },
+        { "name": "George Orwell", "gender": "M", "favorite": true },
+        { "name": "Ray Bradbury", "gender": "M" },
+        { "name": "René Barjavel", "gender": "M", "favorite": true },
+        { "name": "Katherine Burdekin", "gender": "F" }
       ],
       "works": [
         "Nous autres (Zamiatine, 1920)",
         "Le Meilleur des mondes (Huxley, 1932)",
         "1984 (Orwell, 1949)",
-        "Fahrenheit 451 (Bradbury, 1953)"
+        "Fahrenheit 451 (Bradbury, 1953)",
+        "Ravages (Barjavel, 1943)"
       ],
       "connections": {
         "influence": [
@@ -113,27 +161,28 @@
       "description": "Révolution littéraire mettant l'accent sur le style, la psychologie et l'expérimentation narrative. Rejet du techno-optimisme au profit d'une SF plus introspective et sociologique.",
       "context": {
         "historical": "Contre-culture des années 60, mouvement hippie, guerre du Vietnam, mouvements pour les droits civiques, libération sexuelle, crise pétrolière, désillusion post-coloniale, alunissage d'Apollo 11.",
-        "philosophical": "Comment la perception modèle-t-elle la réalité ? Qu'est-ce que l'identité dans un monde en mutation ? Le progrès technologique améliore-t-il vraiment la condition humaine ? Exploration de la conscience altérée et des états modifiés.",
-        "literary": "Expérimentation narrative radicale (stream of consciousness, narration non-linéaire). Influences de la littérature moderniste (Joyce, Woolf). Style poétique et métaphorique. Introspection psychologique. Ambiguïté et fin ouvertes.",
-        "scientific": "Psychologie des profondeurs, drogues psychédéliques, écologie naissante, entropie et chaos, linguistique (hypothèse Sapir-Whorf), anthropologie culturelle.",
-        "themes": "Inner space plutôt qu'outer space, catastrophes écologiques, aliénation urbaine, sexualité et genre fluides, critique de la société de consommation, transformation de la conscience."
+        "themes": "Inner space plutôt qu'outer space, catastrophes écologiques, aliénation urbaine, sexualité et genre fluides, critique de la société de consommation, transformation de la conscience, entropie.",
+        "questionnements": "Comment la perception modèle-t-elle la réalité ? Qu'est-ce que l'identité dans un monde en mutation ? Le progrès technologique améliore-t-il vraiment la condition humaine ? Peut-on échapper au déterminisme social ? La conscience est-elle modifiable ?",
+        "scientific": "Psychologie des profondeurs, drogues psychédéliques, écologie naissante, entropie et chaos, linguistique (hypothèse Sapir-Whorf), anthropologie culturelle, états modifiés de conscience.",
+        "literary": "Expérimentation narrative radicale (stream of consciousness, narration non-linéaire). Influences de la littérature moderniste (Joyce, Woolf). Style poétique et métaphorique. Introspection psychologique. Ambiguïté et fins ouvertes."
       },
       "authors": [
         { "name": "J.G. Ballard", "gender": "M" },
         { "name": "Brian Aldiss", "gender": "M" },
         { "name": "Roger Zelazny", "gender": "M", "favorite": true },
-        { "name": "Ursula K. Le Guin", "gender": "F" },
+        { "name": "Ursula K. Le Guin", "gender": "F", "favorite": true },
         { "name": "Joanna Russ", "gender": "F" },
         { "name": "Samuel R. Delany", "gender": "M" },
-        { "name": "Pamela Zoline", "gender": "F" }
+        { "name": "Pamela Zoline", "gender": "F" },
+        { "name": "Joanna Russ", "gender": "F" }
       ],
       "works": [
         "La Main gauche de la nuit (Le Guin, 1969)",
         "Seigneur de Lumière (Zelazny, 1967)",
-        "Les Princes d'Ambre (Zelazny, 1970)",
-        "Chroniques martiennes (Bradbury, 1950)",
+        "Les Neuf Princes d'Ambre (Zelazny, 1970)",
         "Les Dépossédés (Le Guin, 1974)",
-        "L'Homme-femelle (Russ, 1975)"
+        "L'Homme-femelle (Russ, 1975)",
+        "Cristal qui songe (Ballard, 1966)"
       ],
       "connections": {
         "reaction": [
@@ -149,28 +198,30 @@
       "id": "sf-feministe",
       "title": "SF Féministe",
       "period": "1969-1990",
-      "year": 1975,
+      "year": 1976,
       "description": "Remise en question des structures patriarcales et exploration de sociétés alternatives, de genres fluides et de rapports de pouvoir réinventés.",
       "context": {
         "historical": "Deuxième vague féministe, Roe v. Wade, mouvements de libération des femmes, Women's Lib, premières études de genre, backlash conservateur des années 80, début de la reconnaissance des identités LGBTQ+.",
-        "philosophical": "Le genre est-il biologique ou culturel ? Comment les structures de pouvoir se perpétuent-elles ? Peut-on imaginer des sociétés sans patriarcat ? Qu'est-ce que la maternité hors des normes sociales ? Comment déconstruire les binarités ?",
-        "literary": "Utilisation de la SF comme laboratoire d'expérimentation sociale. Déconstruction des tropes genrés. Narratrices complexes. Utopies féministes et dystopies patriarcales. Écriture incarnée et sensuelle.",
-        "scientific": "Biologie de la reproduction, parthénogenèse, hermaphrodisme, sociobiologie critique, anthropologie féministe, technologie contraceptive.",
-        "themes": "Sociétés sans hommes ou sans femmes, maternité et reproduction contrôlée, violence genrée et viol comme arme politique, sororité et solidarité féminine, travail domestique invisible, réappropriation du corps."
+        "themes": "Sociétés sans hommes ou sans femmes, maternité et reproduction contrôlée, violence genrée et viol comme arme politique, sororité et solidarité féminine, travail domestique invisible, réappropriation du corps.",
+        "questionnements": "Le genre est-il biologique ou culturel ? Comment les structures de pouvoir se perpétuent-elles ? Peut-on imaginer des sociétés sans patriarcat ? Qu'est-ce que la maternité hors des normes sociales ? Comment déconstruire les binarités ? L'oppression est-elle structurelle ou individuelle ?",
+        "scientific": "Biologie de la reproduction, parthénogenèse, hermaphrodisme, sociobiologie critique, anthropologie féministe, technologie contraceptive, clonage.",
+        "literary": "Utilisation de la SF comme laboratoire d'expérimentation sociale. Déconstruction des tropes genrés. Narratrices complexes. Utopies féministes et dystopies patriarcales. Écriture incarnée et sensuelle."
       },
       "authors": [
-        { "name": "Ursula K. Le Guin", "gender": "F" },
-        { "name": "Joanna Russ", "gender": "F" },
+        { "name": "Ursula K. Le Guin", "gender": "F", "favorite": true },
+        { "name": "Joanna Russ", "gender": "F", "favorite": true },
         { "name": "Octavia Butler", "gender": "F" },
         { "name": "James Tiptree Jr. (Alice Sheldon)", "gender": "F" },
         { "name": "Marge Piercy", "gender": "F" },
-        { "name": "Suzy McKee Charnas", "gender": "F" }
+        { "name": "Suzy McKee Charnas", "gender": "F" },
+        { "name": "Sheri S. Tepper", "gender": "F" }
       ],
       "works": [
         "La Main gauche de la nuit (Le Guin, 1969)",
         "L'Homme-femelle (Russ, 1975)",
         "Kindred (Butler, 1979)",
-        "Une Femme au bord du temps (Piercy, 1976)"
+        "Une Femme au bord du temps (Piercy, 1976)",
+        "Houston, Houston, êtes-vous à l'écoute ? (Tiptree, 1976)"
       ],
       "connections": {
         "influence": [
@@ -186,14 +237,14 @@
       "id": "hard-sf",
       "title": "Hard SF",
       "period": "1960-présent",
-      "year": 1990,
+      "year": 1985,
       "description": "SF fondée sur la rigueur scientifique et technique, explorant les implications réalistes des avancées technologiques et des lois physiques.",
       "context": {
         "historical": "Course spatiale, programme Apollo, essor de l'informatique, révolution numérique, fin de la Guerre froide, découvertes en cosmologie et physique quantique, Station spatiale internationale.",
-        "philosophical": "Quelle est notre place dans l'univers ? L'humanité peut-elle survivre ailleurs que sur Terre ? Comment la colonisation spatiale transformerait-elle notre société ? Le déterminisme des lois physiques limite-t-il notre liberté ?",
-        "literary": "Précision scientifique et technique rigoureuse. Worldbuilding basé sur des extrapolations plausibles. Exploration d'idées scientifiques complexes. Souvent didactique. Fascination pour les détails techniques.",
-        "scientific": "Physique relativiste, terraformation, propulsion spatiale, mécanique orbitale, nanotechnologie, simulations informatiques, intelligence artificielle forte, théorie du chaos.",
-        "themes": "Colonisation de Mars et du système solaire, contact extraterrestre (paradoxe de Fermi), singularité technologique, conscience numérique, limites physiques de l'univers, ingénierie à grande échelle."
+        "themes": "Colonisation de Mars et du système solaire, contact extraterrestre (paradoxe de Fermi), singularité technologique, conscience numérique, limites physiques de l'univers, ingénierie à grande échelle.",
+        "questionnements": "Quelle est notre place dans l'univers ? L'humanité peut-elle survivre ailleurs que sur Terre ? Comment la colonisation spatiale transformerait-elle notre société ? Le déterminisme des lois physiques limite-t-il notre liberté ? Sommes-nous seuls ?",
+        "scientific": "Physique relativiste, terraformation, propulsion spatiale, mécanique orbitale, nanotechnologie, simulations informatiques, intelligence artificielle forte, théorie du chaos, mécanique quantique.",
+        "literary": "Précision scientifique et technique rigoureuse. Worldbuilding basé sur des extrapolations plausibles. Exploration d'idées scientifiques complexes. Souvent didactique. Fascination pour les détails techniques."
       },
       "authors": [
         { "name": "Arthur C. Clarke", "gender": "M" },
@@ -202,11 +253,12 @@
         { "name": "Kim Stanley Robinson", "gender": "M" },
         { "name": "Liu Cixin", "gender": "M", "favorite": true },
         { "name": "Nancy Kress", "gender": "F" },
-        { "name": "Linda Nagata", "gender": "F" }
+        { "name": "Linda Nagata", "gender": "F" },
+        { "name": "Catherine Asaro", "gender": "F" }
       ],
       "works": [
         "2001, l'Odyssée de l'espace (Clarke, 1968)",
-        "Mars Trilogy (Robinson, 1992-1996)",
+        "Trilogie de Mars (Robinson, 1992-1996)",
         "Le Problème à trois corps (Liu, 2008)",
         "La Cité des permutants (Egan, 1994)",
         "Beggars in Spain (Kress, 1993)"
@@ -229,10 +281,10 @@
       "description": "Fusion de haute technologie et de basse condition sociale, explorant les mégacorps, les réseaux informatiques, la cybernétique et la marginalité urbaine.",
       "context": {
         "historical": "Reaganomics et néolibéralisme, essor des multinationales, début d'Internet, crise du SIDA, montée de la culture punk et hacker, années 80 japonaises (miracle économique), guerre contre la drogue.",
-        "philosophical": "Qu'est-ce qui définit l'humain quand le corps devient modifiable ? La technologie libère-t-elle ou asservit-elle ? Comment résister dans un capitalisme total ? Le virtuel est-il moins réel que le physique ?",
-        "literary": "Esthétique noir urbain. Style rapide, fragmenté, argotique. Influence du polar et du film noir. Métaphores informatiques. Descriptions sensorielles de la technologie. Antihéros marginaux.",
+        "themes": "Mégacorporations toutes-puissantes, hackers et pirates informatiques, conscience téléchargée, dualité corps/esprit, zones urbaines dystopiques (sprawl), contre-culture techno, mercenariat.",
+        "questionnements": "Qu'est-ce qui définit l'humain quand le corps devient modifiable ? La technologie libère-t-elle ou asservit-elle ? Comment résister dans un capitalisme total ? Le virtuel est-il moins réel que le physique ? Qui contrôle l'information ?",
         "scientific": "Cyberespace et réalité virtuelle, implants cybernétiques, intelligence artificielle, biotechnologie, neurosciences, réseaux informatiques, hacking, drogues de synthèse.",
-        "themes": "Mégacorporations toutes-puissantes, hackers et pirates informatiques, conscience téléchargée, dualité corps/esprit, zones urbaines dystopiques (sprawl), contre-culture techno, mercenariat."
+        "literary": "Esthétique noir urbain. Style rapide, fragmenté, argotique. Influence du polar et du film noir. Métaphores informatiques. Descriptions sensorielles de la technologie. Antihéros marginaux."
       },
       "authors": [
         { "name": "William Gibson", "gender": "M" },
@@ -240,13 +292,15 @@
         { "name": "Pat Cadigan", "gender": "F" },
         { "name": "Rudy Rucker", "gender": "M" },
         { "name": "Melissa Scott", "gender": "F" },
-        { "name": "Marge Piercy", "gender": "F" }
+        { "name": "Marge Piercy", "gender": "F" },
+        { "name": "Laura J. Mixon", "gender": "F" }
       ],
       "works": [
         "Neuromancien (Gibson, 1984)",
         "Gravé sur chrome (Gibson, 1986)",
         "Les Fous (Cadigan, 1987)",
-        "Trouble and Her Friends (Scott, 1994)"
+        "Trouble and Her Friends (Scott, 1994)",
+        "Schismatrice (Sterling, 1985)"
       ],
       "connections": {
         "evolution": [
@@ -271,24 +325,26 @@
       "description": "Renaissance du space opera avec une sophistication narrative accrue, explorant des civilisations galactiques complexes, des IA et des questions éthiques profondes.",
       "context": {
         "historical": "Fin de la Guerre froide, mondialisation, révolution Internet, exploration robotique de Mars, découverte d'exoplanètes, montée de la Chine, théorie des multivers.",
-        "philosophical": "Comment gérer la diversité à l'échelle galactique ? Les IA peuvent-elles être morales ? Qu'est-ce qu'une civilisation post-pénurie ? Comment l'immortalité changerait-elle l'éthique ? Peut-on dépasser les conflits interespèces ?",
-        "literary": "Worldbuilding extrêmement détaillé. Complexité narrative (multiples arcs, chronologies). Diversité des points de vue. Mélange opera/hard SF. Sophistication stylistique. Explorations de conscience non-humaines.",
-        "scientific": "Civilisations Type II et III (échelle de Kardashev), dyson spheres, trous de ver, IA superintelligentes, manipulation de matière exotique, conscience distribuée.",
-        "themes": "Post-humanisme et transhumanisme, civilisations anciennes mystérieuses, économie post-rareté, guerres galactiques et géopolitique cosmique, premiers contacts complexes, IA comme personnages à part entière."
+        "themes": "Post-humanisme et transhumanisme, civilisations anciennes mystérieuses, économie post-rareté, guerres galactiques et géopolitique cosmique, premiers contacts complexes, IA comme personnages à part entière.",
+        "questionnements": "Comment gérer la diversité à l'échelle galactique ? Les IA peuvent-elles être morales ? Qu'est-ce qu'une civilisation post-pénurie ? Comment l'immortalité changerait-elle l'éthique ? Peut-on dépasser les conflits interespèces ?",
+        "scientific": "Civilisations Type II et III (échelle de Kardashev), sphères de Dyson, trous de ver, IA superintelligentes, manipulation de matière exotique, conscience distribuée.",
+        "literary": "Worldbuilding extrêmement détaillé. Complexité narrative (multiples arcs, chronologies). Diversité des points de vue. Mélange opera/hard SF. Sophistication stylistique. Explorations de conscience non-humaines."
       },
       "authors": [
         { "name": "Iain M. Banks", "gender": "M" },
         { "name": "Peter F. Hamilton", "gender": "M" },
         { "name": "Dan Simmons", "gender": "M" },
         { "name": "Ann Leckie", "gender": "F" },
-        { "name": "Lois McMaster Bujold", "gender": "F" },
-        { "name": "Kameron Hurley", "gender": "F" }
+        { "name": "Lois McMaster Bujold", "gender": "F", "favorite": true },
+        { "name": "Kameron Hurley", "gender": "F" },
+        { "name": "Arkady Martine", "gender": "F" }
       ],
       "works": [
         "La Culture (Banks, 1987-2012)",
         "Hypérion (Simmons, 1989)",
-        "Ancillary Justice (Leckie, 2013)",
-        "La Saga Vorkosigan (Bujold, 1986-présent)"
+        "La Justice de l'Ancillaire (Leckie, 2013)",
+        "La Saga Vorkosigan (Bujold, 1986-présent)",
+        "Une mémoire nommée Empire (Martine, 2019)"
       ],
       "connections": {
         "evolution": [
@@ -308,24 +364,26 @@
       "description": "Courant explorant l'expérience et l'imaginaire afro-diasporique à travers la SF, mélangeant technologie, mysticisme, histoire et culture africaine.",
       "context": {
         "historical": "Mouvement des droits civiques, décolonisation africaine, Black Power, migrations post-coloniales, mouvement Black Lives Matter, théories afrocentriques, renaissance culturelle noire.",
-        "philosophical": "Comment se réapproprier un futur dont on a été exclu ? Quelle mémoire préserver face à l'effacement historique ? Comment la science-fiction peut-elle être un outil de libération ? Qu'est-ce qu'une technologie décoloniale ?",
-        "literary": "Mélange de SF et d'éléments mythologiques africains. Réécriture de l'histoire (uchronies de l'esclavage). Oralité et traditions narratives africaines. Langues créoles et code-switching. Esthétique afro-futuriste distinctive.",
+        "themes": "Esclavage et trauma intergénérationnel, retour en Afrique (réel ou imaginé), spiritualité et technologie, résistance et résilience, réparation historique, utopies noires, identité diasporique.",
+        "questionnements": "Comment se réapproprier un futur dont on a été exclu ? Quelle mémoire préserver face à l'effacement historique ? Comment la science-fiction peut-elle être un outil de libération ? Qu'est-ce qu'une technologie décoloniale ? Peut-on guérir le trauma historique ?",
         "scientific": "Technologies ancestrales retrouvées, bio-technologie inspirée de la nature africaine, voyages temporels vers/depuis l'esclavage, conscience collective et mémoire génétique.",
-        "themes": "Esclavage et trauma intergénérationnel, retour en Afrique (réel ou imaginé), spiritualité et technologie, résistance et résilience, réparation historique, utopies noires, identité diasporique."
+        "literary": "Mélange de SF et d'éléments mythologiques africains. Réécriture de l'histoire (uchronies de l'esclavage). Oralité et traditions narratives africaines. Langues créoles et code-switching. Esthétique afro-futuriste distinctive."
       },
       "authors": [
-        { "name": "Octavia Butler", "gender": "F" },
+        { "name": "Octavia Butler", "gender": "F", "favorite": true },
         { "name": "Samuel R. Delany", "gender": "M" },
         { "name": "Nalo Hopkinson", "gender": "F" },
         { "name": "Nnedi Okorafor", "gender": "F" },
-        { "name": "N.K. Jemisin", "gender": "F" },
-        { "name": "Tananarive Due", "gender": "F" }
+        { "name": "N.K. Jemisin", "gender": "F", "favorite": true },
+        { "name": "Tananarive Due", "gender": "F" },
+        { "name": "Andrea Hairston", "gender": "F" }
       ],
       "works": [
-        "Parable of the Sower (Butler, 1993)",
+        "Parabole du semeur (Butler, 1993)",
+        "Sœur du sang (Butler, 1984)",
         "Brown Girl in the Ring (Hopkinson, 1998)",
-        "Who Fears Death (Okorafor, 2010)",
-        "The Fifth Season (Jemisin, 2015)"
+        "Qui a peur de la mort (Okorafor, 2010)",
+        "La Cinquième Saison (Jemisin, 2015)"
       ],
       "connections": {
         "related": [
@@ -338,17 +396,54 @@
       }
     },
     {
+      "id": "new-weird",
+      "title": "New Weird",
+      "period": "1998-2015",
+      "year": 2005,
+      "description": "Mouvement subversif mélangeant fantasy urbaine, horreur et SF, rejetant les clichés consolants du fantastique pour créer des mondes dérangeants et politiquement engagés.",
+      "context": {
+        "historical": "Fin des années 90, crise altermondialiste, 11 septembre et guerre contre le terrorisme, montée de l'anxiété urbaine, gentrification, crise financière 2008.",
+        "themes": "Villes baroques et grotesques, hybridations monstrueuses, politique radicale, révolution et révolte, le corps comme site de transformation, l'étrange familier (uncanny).",
+        "questionnements": "Comment représenter l'aliénation urbaine ? Peut-on faire de l'étrange un outil politique ? Comment la réalité et le fantastique se superposent-ils ? Qu'est-ce qui se cache sous la surface du quotidien ? La monstruosité est-elle politique ?",
+        "scientific": "Biologies impossibles, physiques alternatives, topologies urbaines non-euclidiennes, technologies baslar (incompréhensibles), magie systémique.",
+        "literary": "Rejet des tropes fantasy consolants. Esthétique baroque et grotesque. Descriptions sensorielles intenses. Engagement politique explicite. Mélange des genres (SF/fantasy/horreur). Style souvent dense et exigeant."
+      },
+      "authors": [
+        { "name": "China Miéville", "gender": "M" },
+        { "name": "Jeff VanderMeer", "gender": "M" },
+        { "name": "M. John Harrison", "gender": "M" },
+        { "name": "K.J. Bishop", "gender": "F" },
+        { "name": "Steph Swainston", "gender": "F" },
+        { "name": "Mary Gentle", "gender": "F" }
+      ],
+      "works": [
+        "Perdido Street Station (Miéville, 2000)",
+        "La Ville & la Ville (Miéville, 2009)",
+        "Annihilation (VanderMeer, 2014)",
+        "Viriconium (Harrison, 1971-1984)",
+        "The Etched City (Bishop, 2003)"
+      ],
+      "connections": {
+        "related": [
+          { "to": "cli-fi", "desc": "Exploration de l'étrangeté écologique" }
+        ],
+        "influence": [
+          { "to": "post-cyberpunk", "desc": "Urbanité dystopique et hybride" }
+        ]
+      }
+    },
+    {
       "id": "post-cyberpunk",
-      "title": "Post-Cyberpunk / SF Française Contemporaine",
+      "title": "Post-Cyberpunk",
       "period": "1990-présent",
       "year": 2005,
-      "description": "Évolution du cyberpunk vers une vision plus nuancée de la technologie, avec des protagonistes plus intégrés socialement. La SF française apporte une voix distinctive avec des questionnements philosophiques et politiques.",
+      "description": "Évolution du cyberpunk vers une vision plus nuancée de la technologie, avec des protagonistes plus intégrés socialement et une approche moins nihiliste.",
       "context": {
         "historical": "Démocratisation d'Internet, réseaux sociaux, smartphones, économie de la surveillance, crise financière 2008, mouvements Occupy et Nuit Debout, gilets jaunes, pandémie COVID-19.",
-        "philosophical": "Comment construire des communs numériques ? Peut-on hacker la société elle-même ? Quelle résistance dans l'ère algorithmique ? Comment préserver l'attention et la sensorialité ? (Damasio : langue, souffle, résistance corporelle)",
-        "literary": "Expérimentation linguistique radicale (Damasio). Lyrisme et poésie. Engagement politique explicite. Exploration sensorielle et corporelle. Narration fragmentée et polyphonique. Influence de la philosophie française.",
+        "themes": "Hacktivisme et résistance numérique, capitalisme de surveillance, manipulation algorithmique, communautés alternatives, écologie technologique, langage comme arme politique, corps augmentés et sensorialité.",
+        "questionnements": "Comment construire des communs numériques ? Peut-on hacker la société elle-même ? Quelle résistance dans l'ère algorithmique ? Comment préserver l'attention et la sensorialité ? La technologie peut-elle être au service du collectif ?",
         "scientific": "Réalité augmentée, blockchain et cryptomonnaies, biotechnologie accessible, quantified self, algorithmes et big data, neuro-interfaces, technologies de surveillance.",
-        "themes": "Hacktivisme et résistance numérique, capitalisme de surveillance, manipulation algorithmique, communautés alternatives, écologie technologique, langage comme arme politique, corps augmentés et sensorialité."
+        "literary": "Expérimentation linguistique radicale (Damasio). Lyrisme et poésie. Engagement politique explicite. Exploration sensorielle et corporelle. Narration fragmentée et polyphonique. Influence de la philosophie française."
       },
       "authors": [
         { "name": "Neal Stephenson", "gender": "M" },
@@ -365,9 +460,7 @@
         "La Horde du Contrevent (Damasio, 2004)",
         "Les Furtifs (Damasio, 2019)",
         "Les Guerriers du silence (Bordage, 1994)",
-        "Accelerando (Stross, 2005)",
-        "Tech Heaven (Nagata, 1995)",
-        "Hammered (Bear, 2004)"
+        "Accelerando (Stross, 2005)"
       ],
       "connections": {
         "evolution": [
@@ -382,28 +475,30 @@
       "id": "dystopie-moderne",
       "title": "Dystopie Moderne",
       "period": "1985-présent",
-      "year": 2008,
+      "year": 2010,
       "description": "Nouvelles dystopies explorant la surveillance technologique, l'écologie, les inégalités économiques et les dérives du capitalisme tardif.",
       "context": {
         "historical": "Montée des inégalités, néolibéralisme triomphant, 11 septembre et guerre contre le terrorisme, surveillance de masse (Snowden), montée des populismes, crise climatique, réfugiés climatiques.",
-        "philosophical": "Comment résister dans une société de contrôle total ? La sécurité justifie-t-elle le sacrifice de la liberté ? Quelles formes prend l'oppression contemporaine ? Peut-on encore imaginer des alternatives ?",
-        "literary": "Dystopies plus subtiles et réalistes. Monde proche du nôtre (extrapolation minimale). Young Adult dystopian. Narration à la première personne. Fin souvent ouverte ou ambiguë.",
+        "themes": "Dictatures douces et consentement, théocratie et fondamentalisme, jeux de la mort comme spectacle, clonage et trafic d'organes, privatisation totale, résistance et révolution des jeunes.",
+        "questionnements": "Comment résister dans une société de contrôle total ? La sécurité justifie-t-elle le sacrifice de la liberté ? Quelles formes prend l'oppression contemporaine ? Peut-on encore imaginer des alternatives ? Comment le capitalisme se perpétue-t-il ?",
         "scientific": "Surveillance biométrique, modification génétique, contrôle de la fertilité, drones, réseaux sociaux comme outils de contrôle, score social à la chinoise.",
-        "themes": "Dictatures douces et consentement, théocratie et fondamentalisme, jeux de la mort comme spectacle, clonage et trafic d'organes, privatisation totale, résistance et révolution des jeunes."
+        "literary": "Dystopies plus subtiles et réalistes. Monde proche du nôtre (extrapolation minimale). Young Adult dystopian. Narration à la première personne. Fin souvent ouverte ou ambiguë."
       },
       "authors": [
-        { "name": "Margaret Atwood", "gender": "F" },
+        { "name": "Margaret Atwood", "gender": "F", "favorite": true },
         { "name": "Suzanne Collins", "gender": "F" },
         { "name": "Kazuo Ishiguro", "gender": "M" },
         { "name": "P.D. James", "gender": "F" },
         { "name": "Dmitry Glukhovsky", "gender": "M" },
-        { "name": "Lauren Beukes", "gender": "F" }
+        { "name": "Lauren Beukes", "gender": "F" },
+        { "name": "Naomi Alderman", "gender": "F" }
       ],
       "works": [
         "La Servante écarlate (Atwood, 1985)",
         "Hunger Games (Collins, 2008)",
         "Auprès de moi toujours (Ishiguro, 2005)",
-        "Zoo City (Beukes, 2010)"
+        "Zoo City (Beukes, 2010)",
+        "Le Pouvoir (Alderman, 2016)"
       ],
       "connections": {
         "evolution": [
@@ -423,30 +518,69 @@
       "description": "Science-fiction centrée sur les crises climatiques et environnementales, explorant les conséquences du changement climatique et les adaptations humaines.",
       "context": {
         "historical": "Accords de Paris, rapport du GIEC, catastrophes climatiques amplifiées (ouragans, feux, inondations), extinction de masse, Greta Thunberg et youth strikes, migrations climatiques, COP successives.",
-        "philosophical": "Quelle responsabilité envers les générations futures ? Comment vivre dans un monde en effondrement ? Peut-on encore éviter le pire ? Qu'est-ce que la justice climatique ? Comment faire le deuil du monde d'avant ?",
-        "literary": "Réalisme climatique. Science rigoureuse. Récits d'adaptation et de survie. Solastalgie (tristesse écologique). Narration multi-temporelle (passé/futur). Géoingénierie comme élément narratif.",
-        "scientific": "Réchauffement climatique, montée des eaux, acidification des océans, géo-ingénierie, énergies renouvelables, effondrement des écosystèmes, point de non-retour (tipping points).",
-        "themes": "Réfugiés climatiques, guerres de l'eau, adaptation radicale, éco-terrorisme, sacrifices nécessaires, espoir et désespoir mêlés, responsabilité des pays riches, survivalisme."
+        "themes": "Réfugiés climatiques, guerres de l'eau, adaptation radicale, éco-terrorisme, sacrifices nécessaires, espoir et désespoir mêlés, responsabilité des pays riches, survivalisme.",
+        "questionnements": "Quelle responsabilité envers les générations futures ? Comment vivre dans un monde en effondrement ? Peut-on encore éviter le pire ? Qu'est-ce que la justice climatique ? Comment faire le deuil du monde d'avant ? Qui paiera pour la transition ?",
+        "scientific": "Réchauffement climatique, montée des eaux, acidification des océans, géo-ingénierie, énergies renouvelables, effondrement des écosystèmes, points de non-retour (tipping points).",
+        "literary": "Réalisme climatique. Science rigoureuse. Récits d'adaptation et de survie. Solastalgie (tristesse écologique). Narration multi-temporelle (passé/futur). Géoingénierie comme élément narratif."
       },
       "authors": [
         { "name": "Kim Stanley Robinson", "gender": "M" },
         { "name": "Paolo Bacigalupi", "gender": "M" },
-        { "name": "N.K. Jemisin", "gender": "F" },
+        { "name": "N.K. Jemisin", "gender": "F", "favorite": true },
         { "name": "Claire Vaye Watkins", "gender": "F" },
         { "name": "Octavia Cade", "gender": "F" },
-        { "name": "Jeff VanderMeer", "gender": "M" }
+        { "name": "Jeff VanderMeer", "gender": "M" },
+        { "name": "Margaret Atwood", "gender": "F", "favorite": true }
       ],
       "works": [
         "Le Ministère du Futur (Robinson, 2020)",
         "The Water Knife (Bacigalupi, 2015)",
         "Annihilation (VanderMeer, 2014)",
-        "Gold Fame Citrus (Watkins, 2015)"
+        "Gold Fame Citrus (Watkins, 2015)",
+        "MaddAddam (Atwood, 2003-2013)"
       ],
       "connections": {
         "related": [
           { "to": "dystopie-moderne", "desc": "Dystopies écologiques" },
           { "to": "hard-sf", "desc": "Modélisation scientifique du climat" },
           { "to": "biopunk", "desc": "Solutions biotechnologiques au climat" }
+        ]
+      }
+    },
+    {
+      "id": "hopepunk",
+      "title": "Hopepunk",
+      "period": "2017-présent",
+      "year": 2020,
+      "description": "Mouvement célébrant la résistance par la gentillesse, la communauté et l'optimisme radical face à un monde cynique et violent.",
+      "context": {
+        "historical": "Élection de Trump, Brexit, montée des nationalismes, pandémie COVID-19, crises multiples (climat, économie, social), fatigue dystopique, besoin d'espoir.",
+        "themes": "Gentillesse comme acte de résistance, communautés solidaires, optimisme radical, lutte pour le bien malgré tout, vulnérabilité comme force, l'espoir comme choix politique.",
+        "questionnements": "Comment rester bon dans un monde cynique ? L'optimisme peut-il être révolutionnaire ? La gentillesse est-elle politique ? Peut-on lutter sans désespérer ? Comment construire des solidarités ?",
+        "scientific": "Technologies au service du collectif, médecine accessible, énergies vertes, sciences participatives, open source, communs numériques.",
+        "literary": "Protagonistes qui choisissent la gentillesse. Focus sur la communauté plutôt que le héros solitaire. Fin optimiste sans être naïve. Reconnaissance de la douleur mais refus du cynisme. Ton chaleureux et empathique."
+      },
+      "authors": [
+        { "name": "Becky Chambers", "gender": "F", "favorite": true },
+        { "name": "Mary Robinette Kowal", "gender": "F" },
+        { "name": "T.J. Klune", "gender": "M" },
+        { "name": "Alix E. Harrow", "gender": "F" },
+        { "name": "Martha Wells", "gender": "F" },
+        { "name": "Sarah Gailey", "gender": "F" }
+      ],
+      "works": [
+        "L'Espace d'un an (Chambers, 2014)",
+        "Vers les étoiles (Kowal, 2018)",
+        "La Maison dans l'océan Céruléen (Klune, 2020)",
+        "Les Dix Mille Portes de January (Harrow, 2019)",
+        "Journal d'un AssaSynd (Wells, 2017)"
+      ],
+      "connections": {
+        "reaction": [
+          { "to": "dystopie-moderne", "desc": "Rejet du cynisme dystopique" }
+        ],
+        "related": [
+          { "to": "solarpunk", "desc": "Optimisme et construction d'alternatives" }
         ]
       }
     },
@@ -458,13 +592,13 @@
       "description": "Mouvement optimiste imaginant des futurs écologiques durables, mélangeant technologies vertes, communautés décentralisées et esthétique Art nouveau.",
       "context": {
         "historical": "Crise climatique, mouvement des Communs, coopératives et économie solidaire, décroissance, ZAD et alternatives concrètes, permaculture, low-tech, émergence d'une conscience écologique populaire.",
-        "philosophical": "Peut-on construire un futur désirable ? Comment concilier technologie et nature ? Qu'est-ce qu'une abondance non-extractiviste ? Comment organiser la société sans hiérarchie ? Le progrès peut-il être durable ?",
-        "literary": "Utopies concrètes et réalistes. Descriptions sensorielles de la nature. Communauté comme personnage collectif. Optimisme pragmatique. Valorisation du care et de l'artisanat. Esthétique visuelle forte.",
+        "themes": "Villes-jardins et architecture verte, démocratie directe et assemblées, artisanat et makers, réparation plutôt que remplacement, beauté et esthétique écologique, joie et célébration, solidarité intergénérationnelle.",
+        "questionnements": "Peut-on construire un futur désirable ? Comment concilier technologie et nature ? Qu'est-ce qu'une abondance non-extractiviste ? Comment organiser la société sans hiérarchie ? Le progrès peut-il être durable ?",
         "scientific": "Énergies renouvelables, agriculture urbaine, biomimétisme, économie circulaire, low-tech et résilience, permaculture high-tech, matériaux bio-sourcés.",
-        "themes": "Villes-jardins et architecture verte, démocratie directe et assemblées, artisanat et makers, réparation plutôt que remplacement, beauté et esthétique écologique, joie et célébration, solidarité intergénérationnelle."
+        "literary": "Utopies concrètes et réalistes. Descriptions sensorielles de la nature. Communauté comme personnage collectif. Optimisme pragmatique. Valorisation du care et de l'artisanat. Esthétique visuelle forte."
       },
       "authors": [
-        { "name": "Becky Chambers", "gender": "F" },
+        { "name": "Becky Chambers", "gender": "F", "favorite": true },
         { "name": "Kim Stanley Robinson", "gender": "M" },
         { "name": "Annalee Newitz", "gender": "F" },
         { "name": "Ruthanna Emrys", "gender": "F" },
@@ -473,7 +607,7 @@
       ],
       "works": [
         "L'Espace d'un an (Chambers, 2014)",
-        "The Ministry for the Future (Robinson, 2020)",
+        "Le Ministère du Futur (Robinson, 2020)",
         "The Terraformers (Newitz, 2023)",
         "Too Like the Lightning (Palmer, 2016)"
       ],
@@ -483,7 +617,8 @@
           { "to": "cli-fi", "desc": "Vision optimiste du futur climatique" }
         ],
         "related": [
-          { "to": "post-cyberpunk", "desc": "Technologies humanisées" }
+          { "to": "post-cyberpunk", "desc": "Technologies humanisées" },
+          { "to": "hopepunk", "desc": "Optimisme et construction" }
         ]
       }
     },
@@ -491,28 +626,30 @@
       "id": "biopunk",
       "title": "Biopunk",
       "period": "1990-présent",
-      "year": 2010,
+      "year": 2008,
       "description": "Exploration des biotechnologies, du génie génétique et de leurs implications sociales et éthiques, souvent dans un contexte de contre-culture.",
       "context": {
         "historical": "Projet Génome Humain, OGM et controverses, clonage (Dolly), CRISPR et édition génétique, biohacking DIY, pandémies (H1N1, COVID), débats sur les brevets du vivant.",
-        "philosophical": "Qui possède le vivant ? Peut-on breveter des gènes ? Où tracer la limite entre thérapie et amélioration ? Les modifications génétiques créent-elles des inégalités insurmontables ? Qu'est-ce que la 'nature' humaine ?",
-        "literary": "Body horror biomécanique. Descriptions organiques et viscérales. Critique des biotech corporations. DIY et punk attitude. Hybridation humain/animal/végétal.",
+        "themes": "Modification génétique et eugénisme, biopiraterie et brevets, pandémies créées ou naturelles, corps comme champ de bataille politique, classe génétique, transhumanisme biologique, fermes humaines.",
+        "questionnements": "Qui possède le vivant ? Peut-on breveter des gènes ? Où tracer la limite entre thérapie et amélioration ? Les modifications génétiques créent-elles des inégalités insurmontables ? Qu'est-ce que la 'nature' humaine ?",
         "scientific": "CRISPR et édition génétique, organismes génétiquement modifiés, biologie synthétique, cultures cellulaires, virus modifiés, bactéries programmables, vie artificielle.",
-        "themes": "Modification génétique et eugénisme, biopiraterie et brevets, pandémies créées ou naturelles, corps comme champ de bataille politique, classe génétique, transhumanisme biologique, fermes humaines."
+        "literary": "Body horror biomécanique. Descriptions organiques et viscérales. Critique des biotech corporations. DIY et punk attitude. Hybridation humain/animal/végétal."
       },
       "authors": [
         { "name": "Paul Di Filippo", "gender": "M" },
         { "name": "Greg Bear", "gender": "M" },
-        { "name": "Octavia Butler", "gender": "F" },
+        { "name": "Octavia Butler", "gender": "F", "favorite": true },
         { "name": "Joan Slonczewski", "gender": "F" },
         { "name": "Nancy Kress", "gender": "F" },
-        { "name": "Paolo Bacigalupi", "gender": "M" }
+        { "name": "Paolo Bacigalupi", "gender": "M" },
+        { "name": "Justina Robson", "gender": "F" }
       ],
       "works": [
         "Blood Music (Bear, 1985)",
-        "Xenogenesis Trilogy (Butler, 1987-1989)",
+        "Trilogie Xenogenesis (Butler, 1987-1989)",
         "Beggars in Spain (Kress, 1993)",
-        "The Windup Girl (Bacigalupi, 2009)"
+        "The Windup Girl (Bacigalupi, 2009)",
+        "A Door into Ocean (Slonczewski, 1986)"
       ],
       "connections": {
         "evolution": [
