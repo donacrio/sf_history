@@ -1,0 +1,77 @@
+{
+  "_comment": "This is a template for adding a new movement to movements.json",
+  "_instructions": "Copy this entire object and paste it into the 'movements' array in movements.json",
+
+  "id": "your-movement-id",
+  "title": "Your Movement Name",
+  "period": "2020-2030",
+  "year": 2025,
+  "description": "A brief 1-2 sentence description of the movement that appears in the collapsed card view.",
+
+  "context": {
+    "historical": "What was happening in the world during this period? Major historical events, social changes, technological developments.",
+    "philosophical": "What fundamental questions did this movement explore? What themes and ideas were writers grappling with?",
+    "literary": "What narrative techniques or literary innovations did this movement introduce? What was unique about the writing style?",
+    "scientific": "What scientific concepts, technologies, or theories were central to this movement? What 'what if' questions about science?",
+    "themes": "What recurring themes, motifs, or topics appear across works in this movement?"
+  },
+
+  "authors": [
+    {
+      "name": "Author One Name",
+      "gender": "F",
+      "favorite": true
+    },
+    {
+      "name": "Author Two Name",
+      "gender": "M"
+    },
+    {
+      "name": "Author Three Name",
+      "gender": "F"
+    }
+  ],
+
+  "works": [
+    "Major Work Title (Author Name, Year)",
+    "Another Important Work (Author Name, Year)",
+    "Yet Another Work (Author Name, Year)"
+  ],
+
+  "connections": {
+    "influence": [
+      {
+        "to": "id-of-influenced-movement",
+        "desc": "Brief description of how this movement influenced the other"
+      }
+    ],
+    "reaction": [
+      {
+        "to": "id-of-movement-reacted-against",
+        "desc": "Brief description of how this movement rejected or reacted against the other"
+      }
+    ],
+    "evolution": [
+      {
+        "to": "id-of-movement-evolved-from",
+        "desc": "Brief description of how this movement evolved from the other"
+      }
+    ],
+    "related": [
+      {
+        "to": "id-of-related-movement",
+        "desc": "Brief description of how these movements are related or parallel"
+      }
+    ]
+  },
+
+  "_notes": {
+    "id": "Must be unique, lowercase, use hyphens (e.g., 'cli-fi', 'cyberpunk')",
+    "title": "The display name shown on cards",
+    "period": "Date range as string (e.g., '1980-1995', '2000-présent')",
+    "year": "Single number used for timeline positioning (center of period)",
+    "gender": "Must be 'M' or 'F' - used for author statistics and highlighting",
+    "favorite": "Optional boolean - adds star to author",
+    "connections": "All connection types are optional. Connection 'to' must reference valid movement IDs"
+  }
+}

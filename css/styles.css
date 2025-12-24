@@ -1,0 +1,607 @@
+/* ============================================
+   SF Timeline - Stylesheet
+   ============================================ */
+
+/* Reset & Base Styles
+   -------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+    color: #e0e0e0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Typography
+   -------------------------------------------- */
+h1 {
+    text-align: center;
+    color: #00d4ff;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+/* Controls & Filters
+   -------------------------------------------- */
+.controls {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid #00d4ff;
+    border-radius: 25px;
+    color: #00d4ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+}
+
+.filter-btn.active {
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+.filter-btn.influence { border-color: #00d4ff; }
+.filter-btn.influence.active { background: rgba(0, 212, 255, 0.3); }
+
+.filter-btn.reaction { border-color: #ff6b00; color: #ff6b00; }
+.filter-btn.reaction.active { background: rgba(255, 107, 0, 0.3); }
+
+.filter-btn.evolution { border-color: #00ff88; color: #00ff88; }
+.filter-btn.evolution.active { background: rgba(0, 255, 136, 0.3); }
+
+.filter-btn.related { border-color: #ff00ff; color: #ff00ff; }
+.filter-btn.related.active { background: rgba(255, 0, 255, 0.3); }
+
+/* Minimap
+   -------------------------------------------- */
+.minimap {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    height: 80px;
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid #00d4ff;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.minimap-movement {
+    position: absolute;
+    height: 100%;
+    background: rgba(0, 212, 255, 0.3);
+    border-right: 1px solid #00d4ff;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.minimap-movement:hover {
+    background: rgba(0, 212, 255, 0.5);
+}
+
+.minimap-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    text-align: center;
+}
+
+/* Timeline Structure
+   -------------------------------------------- */
+.timeline-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #00d4ff, #ff00ff);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+svg.connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.connection-line {
+    stroke-width: 2;
+    fill: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, stroke-width 0.3s ease;
+}
+
+.connection-line.active {
+    opacity: 0.8;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+.connection-line.influence {
+    stroke: #00d4ff;
+}
+
+.connection-line.reaction {
+    stroke: #ff6b00;
+}
+
+.connection-line.evolution {
+    stroke: #00ff88;
+}
+
+.connection-line.related {
+    stroke: #ff00ff;
+}
+
+/* Movement Cards
+   -------------------------------------------- */
+.movement {
+    position: relative;
+    margin: 40px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    z-index: 10;
+}
+
+.movement.left {
+    flex-direction: row-reverse;
+}
+
+.movement-card {
+    flex: 1;
+    background: rgba(26, 26, 46, 0.95);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 600px;
+    position: relative;
+}
+
+.movement.left .movement-card {
+    margin-left: auto;
+}
+
+.movement.right .movement-card {
+    margin-right: auto;
+}
+
+.movement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 212, 255, 0.4);
+    border-color: #ff00ff;
+}
+
+.movement-card.expanded {
+    border-color: #ff00ff;
+}
+
+.movement-card.highlighted {
+    border-color: #ffff00;
+    box-shadow: 0 8px 32px rgba(255, 255, 0, 0.4);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #00d4ff;
+    border: 4px solid #1a1a2e;
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+}
+
+/* Movement Card Content
+   -------------------------------------------- */
+.movement-title {
+    font-size: 1.8em;
+    color: #00d4ff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.period {
+    font-size: 0.5em;
+    color: #888;
+    font-weight: normal;
+}
+
+.description {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.details.show {
+    max-height: 6000px;
+}
+
+.section-title {
+    color: #ff00ff;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff00ff;
+    padding-bottom: 5px;
+}
+
+/* Context Boxes
+   -------------------------------------------- */
+.context-box {
+    background: rgba(0, 212, 255, 0.1);
+    border-left: 4px solid #00d4ff;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.context-title {
+    color: #00d4ff;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.context-section {
+    margin-top: 15px;
+}
+
+.context-item {
+    margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid #00d4ff;
+}
+
+.context-label {
+    font-weight: bold;
+    color: #00d4ff;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.context-text {
+    color: #c0c0c0;
+    line-height: 1.6;
+    font-size: 0.9em;
+}
+
+/* Theme Cards
+   -------------------------------------------- */
+.theme-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.theme-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 3px solid;
+    transition: all 0.3s ease;
+}
+
+.theme-card:hover {
+    transform: translateX(3px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.theme-card.philosophical {
+    border-left-color: #ff6b00;
+}
+
+.theme-card.literary {
+    border-left-color: #00ff88;
+}
+
+.theme-card.scientific {
+    border-left-color: #00d4ff;
+}
+
+.theme-card.social {
+    border-left-color: #ff00ff;
+}
+
+.theme-card-title {
+    font-weight: bold;
+    font-size: 0.95em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.theme-card.philosophical .theme-card-title {
+    color: #ff6b00;
+}
+
+.theme-card.literary .theme-card-title {
+    color: #00ff88;
+}
+
+.theme-card.scientific .theme-card-title {
+    color: #00d4ff;
+}
+
+.theme-card.social .theme-card-title {
+    color: #ff00ff;
+}
+
+.theme-card-content {
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: #b0b0b0;
+}
+
+/* Authors & Works
+   -------------------------------------------- */
+.authors, .works {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.author, .work {
+    background: rgba(0, 212, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 3px solid #00d4ff;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.author.female {
+    border-left-color: #ff00ff;
+    border-left-width: 4px;
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 255, 0.1));
+    box-shadow: 0 2px 8px rgba(255, 0, 255, 0.3);
+    font-weight: 600;
+}
+
+.author.female:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(255, 0, 255, 0.5);
+}
+
+.author.favorite {
+    border: 2px solid #ffd700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+    position: relative;
+    padding-left: 30px;
+}
+
+.author.favorite::before {
+    content: "⭐";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+}
+
+.author.favorite.female {
+    border: 2px solid #ffd700;
+    box-shadow: 0 2px 8px rgba(255, 0, 255, 0.3), 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Connections
+   -------------------------------------------- */
+.connections-section {
+    margin-top: 20px;
+}
+
+.connection-group {
+    margin-bottom: 15px;
+}
+
+.connection-type-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.connection-type-title.influence {
+    color: #00d4ff;
+}
+
+.connection-type-title.reaction {
+    color: #ff6b00;
+}
+
+.connection-type-title.evolution {
+    color: #00ff88;
+}
+
+.connection-type-title.related {
+    color: #ff00ff;
+}
+
+.connection-link {
+    display: inline-block;
+    background: rgba(0, 212, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 0.95em;
+    border: 1px solid #00d4ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.connection-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+}
+
+.connection-link.influence {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.2);
+}
+
+.connection-link.reaction {
+    border-color: #ff6b00;
+    background: rgba(255, 107, 0, 0.2);
+}
+
+.connection-link.evolution {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.2);
+}
+
+.connection-link.related {
+    border-color: #ff00ff;
+    background: rgba(255, 0, 255, 0.2);
+}
+
+/* UI Elements
+   -------------------------------------------- */
+.expand-icon {
+    float: right;
+    color: #888;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
+.legend {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(26, 26, 46, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #00d4ff;
+    font-size: 0.9em;
+    z-index: 100;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.legend-color {
+    width: 30px;
+    height: 3px;
+}
+
+.legend-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+/* Animations
+   -------------------------------------------- */
+@keyframes flash {
+    0%, 100% { border-color: #00d4ff; }
+    50% { border-color: #ffff00; box-shadow: 0 0 30px rgba(255, 255, 0, 0.8); }
+}
+
+/* Responsive Design
+   -------------------------------------------- */
+@media (max-width: 1200px) {
+    .timeline-line {
+        display: none;
+    }
+
+    svg.connections {
+        display: none;
+    }
+
+    .movement {
+        flex-direction: column !important;
+    }
+
+    .movement-card {
+        margin: 0 auto !important;
+        max-width: 100%;
+    }
+
+    .timeline-dot {
+        display: none;
+    }
+
+    .legend {
+        position: static;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+}
