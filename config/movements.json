@@ -61,10 +61,10 @@
       ],
       "works": [
         "Une princesse de Mars (Burroughs, 1912)",
-        "Les Guerrières de Mars (Brackett, 1949)",
-        "Le Cycle d'Alastor (Vance, 1973-1978)",
+        "Le Secret de Sinharat (Brackett, 1964)",
+        "Les Mondes d'Alastor (Vance, 1973-1978)",
         "La Terre mourante (Vance, 1950)",
-        "Northwest Smith (Moore, 1933-1940)"
+        "Les aventures de Northwest Smith (Moore, 1933-1940)"
       ],
       "connections": {
         "evolution": [
@@ -102,7 +102,7 @@
         "Le Cycle de Fondation (Asimov, 1951-1993)",
         "Le Cycle des Robots (Asimov, 1950-1985)",
         "Étoiles, garde-à-vous ! (Heinlein, 1959)",
-        "Les Guerrières de Mars (Brackett, 1949)",
+        "Le Secret de Sinharat (Brackett, 1964)",
         "La Geste des Princes-Démons (Vance, 1966-1967)",
         "Shambleau (Moore, 1933)"
       ],
@@ -216,8 +216,8 @@
       ],
       "works": [
         "La Main gauche de la nuit (Le Guin, 1969)",
-        "L'Homme-femelle (Russ, 1975)",
-        "Kindred (Butler, 1979)",
+        "L'Autre Moitié de l'homme (Russ, 1975)",
+        "Liens de sang (Butler, 1979)",
         "Une Femme au bord du temps (Piercy, 1976)",
         "Houston, Houston, êtes-vous à l'écoute ? (Tiptree, 1976)"
       ],
@@ -259,7 +259,7 @@
         "Trilogie de Mars (Robinson, 1992-1996)",
         "Le Problème à trois corps (Liu, 2008)",
         "La Cité des permutants (Egan, 1994)",
-        "Beggars in Spain (Kress, 1993)"
+        "L'une rêve, l'autre pas (Kress, 1993)"
       ],
       "connections": {
         "evolution": [
@@ -377,10 +377,10 @@
         { "name": "Andrea Hairston", "gender": "F" }
       ],
       "works": [
-        "Parabole du semeur (Butler, 1993)",
-        "Sœur du sang (Butler, 1984)",
-        "Brown Girl in the Ring (Hopkinson, 1998)",
-        "Qui a peur de la mort (Okorafor, 2010)",
+        "La Parabole du semeur (Butler, 1993)",
+        "Mauvaise graine (Butler, 1980)",
+        "La Ronde des Esprits (Hopkinson, 1998)",
+        "Qui a peur de la mort ? (Okorafor, 2010)",
         "La Cinquième Saison (Jemisin, 2015)"
       ],
       "connections": {
@@ -418,7 +418,7 @@
         "Perdido Street Station (Miéville, 2000)",
         "La Ville & la Ville (Miéville, 2009)",
         "Annihilation (VanderMeer, 2014)",
-        "Viriconium (Harrison, 1971-1984)",
+        "La cité pastel (Harrison, 1971)",
         "The Etched City (Bishop, 2003)"
       ],
       "connections": {
@@ -454,7 +454,7 @@
         { "name": "Madeline Ashby", "gender": "F" }
       ],
       "works": [
-        "Snow Crash (Stephenson, 1992)",
+        "Le Samouraï virtuel (Stephenson, 1992)",
         "La Horde du Contrevent (Damasio, 2004)",
         "Les Furtifs (Damasio, 2019)",
         "Les Guerriers du silence (Bordage, 1994)",
@@ -532,10 +532,10 @@
       ],
       "works": [
         "Le Ministère du Futur (Robinson, 2020)",
-        "The Water Knife (Bacigalupi, 2015)",
+        "Water Knife (Bacigalupi, 2015)",
         "Annihilation (VanderMeer, 2014)",
         "Gold Fame Citrus (Watkins, 2015)",
-        "MaddAddam (Atwood, 2003-2013)"
+        "MaddAddam (Atwood, 2013)"
       ],
       "connections": {
         "related": [
@@ -643,10 +643,10 @@
         { "name": "Justina Robson", "gender": "F" }
       ],
       "works": [
-        "Blood Music (Bear, 1985)",
+        "La Musique du sang (Bear, 1985)",
         "Trilogie Xenogenesis (Butler, 1987-1989)",
-        "Beggars in Spain (Kress, 1993)",
-        "The Windup Girl (Bacigalupi, 2009)",
+        "L'une rêve, l'autre pas (Kress, 1993)",
+        "La Fille automate (Bacigalupi, 2009)",
         "A Door into Ocean (Slonczewski, 1986)"
       ],
       "connections": {
