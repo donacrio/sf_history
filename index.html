@@ -15,40 +15,17 @@
     <h1>🌌 Fresque des Courants de la Science-Fiction 🚀</h1>
     <p class="subtitle">Cliquez sur chaque courant pour découvrir ses auteurs et œuvres</p>
 
-    <!-- Legend -->
-    <div class="legend">
-        <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">Légende</div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #00d4ff;"></div>
-            <span>Auteurs</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #ff00ff;"></div>
-            <span>Autrices (mise en valeur)</span>
-        </div>
-        <div class="legend-item">
-            <span style="font-size: 1.2em; margin-right: 5px;">⭐</span>
-            <span>Vos auteur·ice·s préféré·e·s</span>
-        </div>
-        <div class="legend-section">
-            <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">Types de liens</div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #00d4ff;"></div>
-                <span>→ Influence directe</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ff6b00;"></div>
-                <span>⚡ Réaction contre</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #00ff88;"></div>
-                <span>↗ Évolution de</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ff00ff;"></div>
-                <span>↔ Lié à</span>
-            </div>
-        </div>
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+        <span class="toggle-icon">◀</span>
+        <span class="toggle-text">Détails</span>
+    </button>
+
+    <!-- Zoom Controls -->
+    <div class="zoom-controls" id="zoom-controls">
+        <button class="zoom-btn" id="zoom-out" aria-label="Zoom out">−</button>
+        <span class="zoom-level" id="zoom-level">100%</span>
+        <button class="zoom-btn" id="zoom-in" aria-label="Zoom in">+</button>
     </div>
 
     <!-- Timeline Container -->

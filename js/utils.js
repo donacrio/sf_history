@@ -55,11 +55,15 @@ export function getYearRange(movements) {
  * @returns {Array} Array of movements with assigned lane numbers
  */
 export function assignLanes(movements) {
-  // Sort movements by start year
+  // Sort movements by start year, then by end year (longer spans first)
   const sorted = [...movements].sort((a, b) => {
     const aPeriod = parsePeriod(a.period);
     const bPeriod = parsePeriod(b.period);
-    return aPeriod.start - bPeriod.start;
+    if (aPeriod.start !== bPeriod.start) {
+      return aPeriod.start - bPeriod.start;
+    }
+    // If same start, put longer duration first
+    return (bPeriod.end - bPeriod.start) - (aPeriod.end - aPeriod.start);
   });
 
   // Track occupied lanes: array of lane objects with end year
@@ -69,9 +73,10 @@ export function assignLanes(movements) {
     const { start, end } = parsePeriod(movement.period);
 
     // Find first available lane (lane where last movement ended before this starts)
+    // Add buffer of 5 years to avoid tight overlaps
     let assignedLane = -1;
     for (let i = 0; i < lanes.length; i++) {
-      if (lanes[i] <= start) {
+      if (lanes[i] + 5 <= start) {
         assignedLane = i;
         lanes[i] = end; // Update lane's end year
         break;
@@ -115,5 +120,6 @@ export function generateDecades(minYear, maxYear) {
 export function yearToPosition(year, minYear, maxYear) {
   const range = maxYear - minYear;
   const offset = year - minYear;
-  return (offset / range) * 100;
+  // Scale up by 3x for more horizontal space
+  return (offset / range) * 300;
 }

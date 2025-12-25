@@ -38,7 +38,7 @@ export function validateMovementData(movements) {
 
     // Context validation
     if (movement.context) {
-      const requiredContextFields = ['historical', 'philosophical', 'literary', 'scientific', 'themes'];
+      const requiredContextFields = ['historical', 'themes', 'questionnements', 'scientific', 'literary'];
       requiredContextFields.forEach(field => {
         if (!movement.context[field]) {
           errors.push(`Movement ${idx} (${movement.id}): missing context.${field}`);

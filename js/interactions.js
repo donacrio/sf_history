@@ -13,6 +13,8 @@ export function setupInteractions() {
   setupBarInteractions();
   setupConnectionClicks();
   setupWindowResize();
+  setupSidebarToggle();
+  setupZoomControls();
 }
 
 /**
@@ -81,6 +83,101 @@ function setupWindowResize() {
       const movements = getMovements();
       drawConnections(movements);
     }, 150);
+  });
+}
+
+/**
+ * Sets up sidebar toggle button functionality
+ */
+function setupSidebarToggle() {
+  const toggleButton = document.getElementById('sidebar-toggle');
+  const sidebar = document.getElementById('details-sidebar');
+  const container = document.getElementById('timeline');
+
+  if (!toggleButton || !sidebar || !container) return;
+
+  toggleButton.addEventListener('click', () => {
+    const isActive = toggleButton.classList.contains('active');
+
+    if (isActive) {
+      // Hide sidebar
+      sidebar.classList.add('hidden');
+      container.classList.add('sidebar-hidden');
+      toggleButton.classList.remove('active');
+    } else {
+      // Show sidebar
+      sidebar.classList.remove('hidden');
+      container.classList.remove('sidebar-hidden');
+      toggleButton.classList.add('active');
+    }
+  });
+}
+
+/**
+ * Sets up zoom controls functionality
+ */
+function setupZoomControls() {
+  const zoomInBtn = document.getElementById('zoom-in');
+  const zoomOutBtn = document.getElementById('zoom-out');
+  const zoomLevelDisplay = document.getElementById('zoom-level');
+  const timeAxis = document.getElementById('time-axis');
+  const movementBars = document.getElementById('movements-bars');
+  const connectionsSvg = document.getElementById('connections-svg');
+
+  if (!zoomInBtn || !zoomOutBtn || !zoomLevelDisplay) return;
+
+  let zoomLevel = 1.0; // 100% = 1.0
+  const minZoom = 0.5; // 50%
+  const maxZoom = 3.0; // 300%
+  const zoomStep = 0.25; // 25% increments
+
+  function updateZoom(newZoom) {
+    zoomLevel = Math.max(minZoom, Math.min(maxZoom, newZoom));
+
+    // Update display
+    zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 100)}%`;
+
+    // Apply zoom to timeline elements
+    if (timeAxis) {
+      const baseWidth = 300; // 300% base width
+      timeAxis.style.width = `${baseWidth * zoomLevel}%`;
+    }
+    if (movementBars) {
+      const baseWidth = 300;
+      movementBars.style.width = `${baseWidth * zoomLevel}%`;
+    }
+    if (connectionsSvg) {
+      const baseWidth = 300;
+      connectionsSvg.style.width = `${baseWidth * zoomLevel}%`;
+    }
+
+    // Redraw connections after zoom
+    setTimeout(() => {
+      const movements = getMovements();
+      drawConnections(movements);
+    }, 50);
+  }
+
+  zoomInBtn.addEventListener('click', () => {
+    updateZoom(zoomLevel + zoomStep);
+  });
+
+  zoomOutBtn.addEventListener('click', () => {
+    updateZoom(zoomLevel - zoomStep);
+  });
+
+  // Keyboard shortcuts: Ctrl/Cmd + / Ctrl/Cmd -
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+      e.preventDefault();
+      updateZoom(zoomLevel + zoomStep);
+    } else if ((e.ctrlKey || e.metaKey) && (e.key === '-' || e.key === '_')) {
+      e.preventDefault();
+      updateZoom(zoomLevel - zoomStep);
+    } else if ((e.ctrlKey || e.metaKey) && e.key === '0') {
+      e.preventDefault();
+      updateZoom(1.0); // Reset to 100%
+    }
   });
 }
 

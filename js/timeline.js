@@ -30,10 +30,13 @@ export function renderTimeline(movements) {
       <svg class="connections" id="connections-svg"></svg>
       <div class="movements-bars" id="movements-bars"></div>
     </div>
-    <div class="details-sidebar empty" id="details-sidebar">
+    <div class="details-sidebar hidden" id="details-sidebar">
       <p>Cliquez sur un courant pour voir ses détails</p>
     </div>
   `;
+
+  // Start with sidebar hidden
+  container.classList.add('sidebar-hidden');
 
   // Render time axis with decades
   renderTimeAxis();
@@ -51,6 +54,9 @@ export function renderTimeline(movements) {
 function renderTimeAxis() {
   const timeAxis = document.getElementById('time-axis');
   const decades = generateDecades(yearRange.minYear, yearRange.maxYear);
+
+  // Ensure the axis line extends to 100% of its container width (which is already 300%)
+  timeAxis.style.minWidth = '100%';
 
   decades.forEach(decade => {
     const position = yearToPosition(decade, yearRange.minYear, yearRange.maxYear);
@@ -71,8 +77,8 @@ function renderTimeAxis() {
  */
 function renderMovementBars(movements) {
   const barsContainer = document.getElementById('movements-bars');
-  const laneHeight = 50; // Height of each lane (bar + spacing)
-  const barHeight = 40; // Height of the bar itself
+  const laneHeight = 70; // Height of each lane (bar + spacing)
+  const barHeight = 60; // Height of the bar itself
 
   // Calculate container height based on number of lanes
   const maxLane = Math.max(...movements.map(m => m.lane || 0));
@@ -122,7 +128,15 @@ export function showMovementDetails(movementId) {
   });
 
   const sidebar = document.getElementById('details-sidebar');
-  sidebar.classList.remove('empty');
+  const container = document.getElementById('timeline');
+  const toggleButton = document.getElementById('sidebar-toggle');
+
+  // Show sidebar when movement is clicked
+  sidebar.classList.remove('empty', 'hidden');
+  container.classList.remove('sidebar-hidden');
+  if (toggleButton) {
+    toggleButton.classList.add('active');
+  }
 
   // Count authors by gender
   const maleAuthors = movement.authors.filter(a => a.gender === 'M');
@@ -291,7 +305,14 @@ export function drawConnections(movements) {
           svg.appendChild(path);
 
           // Add arrowhead marker
-          addArrowhead(svg, toX, toY, Math.atan2(toY - controlY2, toX - controlX2), type);
+          const arrowhead = addArrowhead(svg, toX, toY, Math.atan2(toY - controlY2, toX - controlX2), type);
+          arrowhead.setAttribute('data-from', movement.id);
+          arrowhead.setAttribute('data-to', conn.to);
+
+          // Highlight arrowhead if connected to current selection
+          if (currentSelection && (movement.id === currentSelection || conn.to === currentSelection)) {
+            arrowhead.classList.add('active');
+          }
         });
       }
     });
@@ -329,9 +350,9 @@ function addArrowhead(svg, x, y, angle, type) {
     related: '#ff00ff'
   };
   polygon.setAttribute('fill', colors[type] || '#00d4ff');
-  polygon.style.opacity = currentSelection ? '0.8' : '0.3';
 
   svg.appendChild(polygon);
+  return polygon;
 }
 
 /**
@@ -341,10 +362,11 @@ function addArrowhead(svg, x, y, angle, type) {
  */
 export function highlightConnections(movementId, highlight) {
   const lines = document.querySelectorAll('.connection-line');
+  const arrowheads = document.querySelectorAll('.connection-arrowhead');
   const bars = document.querySelectorAll('.movement-bar');
 
   if (highlight) {
-    // Highlight connected bars and lines
+    // Highlight connected bars, lines, and arrowheads
     lines.forEach(line => {
       const from = line.getAttribute('data-from');
       const to = line.getAttribute('data-to');
@@ -358,6 +380,15 @@ export function highlightConnections(movementId, highlight) {
         }
       }
     });
+
+    arrowheads.forEach(arrowhead => {
+      const from = arrowhead.getAttribute('data-from');
+      const to = arrowhead.getAttribute('data-to');
+
+      if (from === movementId || to === movementId) {
+        arrowhead.classList.add('active');
+      }
+    });
   } else {
     // Remove highlight unless it's the current selection
     lines.forEach(line => {
@@ -367,6 +398,17 @@ export function highlightConnections(movementId, highlight) {
       if (from === movementId || to === movementId) {
         if (!currentSelection || (from !== currentSelection && to !== currentSelection)) {
           line.classList.remove('active');
+        }
+      }
+    });
+
+    arrowheads.forEach(arrowhead => {
+      const from = arrowhead.getAttribute('data-from');
+      const to = arrowhead.getAttribute('data-to');
+
+      if (from === movementId || to === movementId) {
+        if (!currentSelection || (from !== currentSelection && to !== currentSelection)) {
+          arrowhead.classList.remove('active');
         }
       }
     });
