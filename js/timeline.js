@@ -147,6 +147,32 @@ export function showMovementDetails(movementId) {
     <div class="sidebar-period">${movement.period}</div>
     <div class="sidebar-description">${movement.description}</div>
 
+    ${movement.context ? `
+      <div class="section-title">🌍 Contexte & Enjeux</div>
+      <div class="context-section">
+        <div class="context-item">
+          <div class="context-label">📅 Contexte historique</div>
+          <div class="context-text">${movement.context.historical}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">💭 Thèmes récurrents</div>
+          <div class="context-text">${movement.context.themes}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">🤔 Questionnements de société</div>
+          <div class="context-text">${movement.context.questionnements}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">🔬 Concepts scientifiques</div>
+          <div class="context-text">${movement.context.scientific}</div>
+        </div>
+        <div class="context-item">
+          <div class="context-label">✍️ Innovations littéraires</div>
+          <div class="context-text">${movement.context.literary}</div>
+        </div>
+      </div>
+    ` : ''}
+
     <div class="section-title">👥 Auteur·ice·s majeur·e·s (${femaleAuthors.length}♀ / ${maleAuthors.length}♂)</div>
     <div class="authors">
       ${movement.authors.map(author => `
@@ -162,32 +188,6 @@ export function showMovementDetails(movementId) {
         <div class="work">${work}</div>
       `).join('')}
     </div>
-
-    ${movement.context ? `
-      <div class="section-title">🌍 Contexte & Enjeux</div>
-      <div class="context-section">
-        <div class="context-item">
-          <div class="context-label">📅 Contexte historique</div>
-          <div class="context-text">${movement.context.historical}</div>
-        </div>
-        <div class="context-item">
-          <div class="context-label">🤔 Questions philosophiques</div>
-          <div class="context-text">${movement.context.philosophical}</div>
-        </div>
-        <div class="context-item">
-          <div class="context-label">✍️ Innovations littéraires</div>
-          <div class="context-text">${movement.context.literary}</div>
-        </div>
-        <div class="context-item">
-          <div class="context-label">🔬 Concepts scientifiques</div>
-          <div class="context-text">${movement.context.scientific}</div>
-        </div>
-        <div class="context-item">
-          <div class="context-label">💭 Thèmes récurrents</div>
-          <div class="context-text">${movement.context.themes}</div>
-        </div>
-      </div>
-    ` : ''}
 
     ${renderConnectionsSection(movement)}
   `;

@@ -45,6 +45,9 @@ export function getYearRange(movements) {
   minYear = Math.floor(minYear / 10) * 10;
   maxYear = Math.ceil(maxYear / 10) * 10;
 
+  // Force timeline to start at 1880
+  minYear = Math.min(minYear, 1880);
+
   return { minYear, maxYear };
 }
 
@@ -115,11 +118,11 @@ export function generateDecades(minYear, maxYear) {
  * @param {number} year - Year to convert
  * @param {number} minYear - Minimum year in range
  * @param {number} maxYear - Maximum year in range
- * @returns {number} Position as percentage (0-100)
+ * @returns {number} Position as percentage (0-100) relative to container
  */
 export function yearToPosition(year, minYear, maxYear) {
   const range = maxYear - minYear;
   const offset = year - minYear;
-  // Scale up by 3x for more horizontal space
-  return (offset / range) * 300;
+  // Return percentage within the 300% wide container (0-100%)
+  return (offset / range) * 100;
 }

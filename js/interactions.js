@@ -126,16 +126,16 @@ function setupZoomControls() {
 
   if (!zoomInBtn || !zoomOutBtn || !zoomLevelDisplay) return;
 
-  let zoomLevel = 1.0; // 100% = 1.0
-  const minZoom = 0.5; // 50%
-  const maxZoom = 3.0; // 300%
+  let zoomLevel = 0.25; // 25% actual = 100% display (default)
+  const minZoom = 0.25; // 25% actual = 100% display
+  const maxZoom = 3.0; // 300% actual = 1200% display
   const zoomStep = 0.25; // 25% increments
 
   function updateZoom(newZoom) {
     zoomLevel = Math.max(minZoom, Math.min(maxZoom, newZoom));
 
-    // Update display
-    zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 100)}%`;
+    // Update display (multiply by 4 to show 25% as 100%)
+    zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 400)}%`;
 
     // Apply zoom to timeline elements
     if (timeAxis) {
@@ -179,6 +179,9 @@ function setupZoomControls() {
       updateZoom(1.0); // Reset to 100%
     }
   });
+
+  // Set initial zoom to 25% (displays as 100%)
+  updateZoom(0.25);
 }
 
 /**

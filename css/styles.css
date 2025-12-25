@@ -312,28 +312,15 @@ svg.connections {
     height: 100%;
     pointer-events: none;
     z-index: 5;
+    display: none; /* Hide all connection visualizations */
 }
 
 .connection-line {
-    stroke-width: 2;
-    fill: none;
-    opacity: 0;
-    transition: opacity 0.3s ease, stroke-width 0.3s ease;
-}
-
-.connection-line.active {
-    opacity: 0.8;
-    stroke-width: 3;
-    filter: drop-shadow(0 0 8px currentColor);
+    display: none; /* Hide connection lines */
 }
 
 .connection-arrowhead {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.connection-arrowhead.active {
-    opacity: 0.8;
+    display: none; /* Hide arrowheads */
 }
 
 .connection-line.influence {
