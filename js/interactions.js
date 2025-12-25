@@ -126,29 +126,27 @@ function setupZoomControls() {
 
   if (!zoomInBtn || !zoomOutBtn || !zoomLevelDisplay) return;
 
-  let zoomLevel = 0.25; // 25% actual = 100% display (default)
-  const minZoom = 0.25; // 25% actual = 100% display
-  const maxZoom = 3.0; // 300% actual = 1200% display
+  let zoomLevel = 2.0; // 200% actual = 100% display (default)
+  const minZoom = 0.25; // 25% actual = 12.5% display
+  const maxZoom = 4.0; // 400% actual = 200% display
   const zoomStep = 0.25; // 25% increments
 
   function updateZoom(newZoom) {
     zoomLevel = Math.max(minZoom, Math.min(maxZoom, newZoom));
 
-    // Update display (multiply by 4 to show 25% as 100%)
-    zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 400)}%`;
+    // Update display (divide by 2 to show 200% as 100%)
+    zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 50)}%`;
 
     // Apply zoom to timeline elements
+    // Base width is 300%, zoomLevel 2.0 gives 600% (which displays as 100%)
     if (timeAxis) {
-      const baseWidth = 300; // 300% base width
-      timeAxis.style.width = `${baseWidth * zoomLevel}%`;
+      timeAxis.style.width = `${300 * zoomLevel}%`;
     }
     if (movementBars) {
-      const baseWidth = 300;
-      movementBars.style.width = `${baseWidth * zoomLevel}%`;
+      movementBars.style.width = `${300 * zoomLevel}%`;
     }
     if (connectionsSvg) {
-      const baseWidth = 300;
-      connectionsSvg.style.width = `${baseWidth * zoomLevel}%`;
+      connectionsSvg.style.width = `${300 * zoomLevel}%`;
     }
 
     // Redraw connections after zoom
@@ -180,8 +178,8 @@ function setupZoomControls() {
     }
   });
 
-  // Set initial zoom to 25% (displays as 100%)
-  updateZoom(0.25);
+  // Set initial zoom to 200% (displays as 100%)
+  updateZoom(2.0);
 }
 
 /**
