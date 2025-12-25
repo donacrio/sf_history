@@ -3,8 +3,12 @@
  * Handles user interactions and event listeners for horizontal layout
  */
 
-import { highlightConnections, drawConnections, showMovementDetails } from './timeline.js';
-import { getMovements } from './config.js';
+import {
+  highlightConnections,
+  drawConnections,
+  showMovementDetails,
+} from "./timeline.js";
+import { getMovements } from "./config.js";
 
 /**
  * Sets up all event listeners for user interactions
@@ -21,13 +25,13 @@ export function setupInteractions() {
  * Sets up click and hover interactions for movement bars
  */
 function setupBarInteractions() {
-  const timeline = document.getElementById('timeline');
+  const timeline = document.getElementById("timeline");
 
   // Click on bar to show details in sidebar
-  timeline.addEventListener('click', (event) => {
-    const bar = event.target.closest('.movement-bar');
-    if (bar && !event.target.closest('.connection-link')) {
-      const movementId = bar.getAttribute('data-id');
+  timeline.addEventListener("click", (event) => {
+    const bar = event.target.closest(".movement-bar");
+    if (bar && !event.target.closest(".connection-link")) {
+      const movementId = bar.getAttribute("data-id");
       if (movementId) {
         showMovementDetails(movementId);
       }
@@ -35,34 +39,42 @@ function setupBarInteractions() {
   });
 
   // Hover to highlight connections
-  timeline.addEventListener('mouseenter', (event) => {
-    const bar = event.target.closest('.movement-bar');
-    if (bar) {
-      const movementId = bar.getAttribute('data-id');
-      highlightConnections(movementId, true);
-    }
-  }, true);
+  timeline.addEventListener(
+    "mouseenter",
+    (event) => {
+      const bar = event.target.closest(".movement-bar");
+      if (bar) {
+        const movementId = bar.getAttribute("data-id");
+        highlightConnections(movementId, true);
+      }
+    },
+    true
+  );
 
-  timeline.addEventListener('mouseleave', (event) => {
-    const bar = event.target.closest('.movement-bar');
-    if (bar) {
-      const movementId = bar.getAttribute('data-id');
-      highlightConnections(movementId, false);
-    }
-  }, true);
+  timeline.addEventListener(
+    "mouseleave",
+    (event) => {
+      const bar = event.target.closest(".movement-bar");
+      if (bar) {
+        const movementId = bar.getAttribute("data-id");
+        highlightConnections(movementId, false);
+      }
+    },
+    true
+  );
 }
 
 /**
  * Sets up click interactions for connection links in sidebar
  */
 function setupConnectionClicks() {
-  const timeline = document.getElementById('timeline');
+  const timeline = document.getElementById("timeline");
 
-  timeline.addEventListener('click', (event) => {
-    const link = event.target.closest('.connection-link');
+  timeline.addEventListener("click", (event) => {
+    const link = event.target.closest(".connection-link");
     if (link) {
       event.stopPropagation();
-      const targetId = link.getAttribute('data-target');
+      const targetId = link.getAttribute("data-target");
       if (targetId) {
         // Scroll to the movement bar and show its details
         scrollToMovementBar(targetId);
@@ -77,7 +89,7 @@ function setupConnectionClicks() {
  */
 function setupWindowResize() {
   let resizeTimeout;
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       const movements = getMovements();
@@ -90,25 +102,25 @@ function setupWindowResize() {
  * Sets up sidebar toggle button functionality
  */
 function setupSidebarToggle() {
-  const toggleButton = document.getElementById('sidebar-toggle');
-  const sidebar = document.getElementById('details-sidebar');
-  const container = document.getElementById('timeline');
+  const toggleButton = document.getElementById("sidebar-toggle");
+  const sidebar = document.getElementById("details-sidebar");
+  const container = document.getElementById("timeline");
 
   if (!toggleButton || !sidebar || !container) return;
 
-  toggleButton.addEventListener('click', () => {
-    const isActive = toggleButton.classList.contains('active');
+  toggleButton.addEventListener("click", () => {
+    const isActive = toggleButton.classList.contains("active");
 
     if (isActive) {
       // Hide sidebar
-      sidebar.classList.add('hidden');
-      container.classList.add('sidebar-hidden');
-      toggleButton.classList.remove('active');
+      sidebar.classList.add("hidden");
+      container.classList.add("sidebar-hidden");
+      toggleButton.classList.remove("active");
     } else {
       // Show sidebar
-      sidebar.classList.remove('hidden');
-      container.classList.remove('sidebar-hidden');
-      toggleButton.classList.add('active');
+      sidebar.classList.remove("hidden");
+      container.classList.remove("sidebar-hidden");
+      toggleButton.classList.add("active");
     }
   });
 }
@@ -117,24 +129,24 @@ function setupSidebarToggle() {
  * Sets up zoom controls functionality
  */
 function setupZoomControls() {
-  const zoomInBtn = document.getElementById('zoom-in');
-  const zoomOutBtn = document.getElementById('zoom-out');
-  const zoomLevelDisplay = document.getElementById('zoom-level');
-  const timeAxis = document.getElementById('time-axis');
-  const movementBars = document.getElementById('movements-bars');
-  const connectionsSvg = document.getElementById('connections-svg');
+  const zoomInBtn = document.getElementById("zoom-in");
+  const zoomOutBtn = document.getElementById("zoom-out");
+  const zoomLevelDisplay = document.getElementById("zoom-level");
+  const timeAxis = document.getElementById("time-axis");
+  const movementBars = document.getElementById("movements-bars");
+  const connectionsSvg = document.getElementById("connections-svg");
 
   if (!zoomInBtn || !zoomOutBtn || !zoomLevelDisplay) return;
 
-  let zoomLevel = 2.0; // 200% actual = 100% display (default)
-  const minZoom = 0.25; // 25% actual = 12.5% display
-  const maxZoom = 4.0; // 400% actual = 200% display
-  const zoomStep = 0.25; // 25% increments
+  let zoomLevel = 4.0; // 200% actual = 100% display (default - zoomed in 2x)
+  const minZoom = 0.5; // 50% actual = 25% display
+  const maxZoom = 8.0; // 800% actual = 400% display
+  const zoomStep = 0.5; // 50% increments in actual zoom
 
   function updateZoom(newZoom) {
     zoomLevel = Math.max(minZoom, Math.min(maxZoom, newZoom));
 
-    // Update display (divide by 2 to show 200% as 100%)
+    // Update display (divide by 2 to show 2x zoom as 100%)
     zoomLevelDisplay.textContent = `${Math.round(zoomLevel * 50)}%`;
 
     // Apply zoom to timeline elements
@@ -156,30 +168,30 @@ function setupZoomControls() {
     }, 50);
   }
 
-  zoomInBtn.addEventListener('click', () => {
+  zoomInBtn.addEventListener("click", () => {
     updateZoom(zoomLevel + zoomStep);
   });
 
-  zoomOutBtn.addEventListener('click', () => {
+  zoomOutBtn.addEventListener("click", () => {
     updateZoom(zoomLevel - zoomStep);
   });
 
   // Keyboard shortcuts: Ctrl/Cmd + / Ctrl/Cmd -
-  window.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === "+" || e.key === "=")) {
       e.preventDefault();
       updateZoom(zoomLevel + zoomStep);
-    } else if ((e.ctrlKey || e.metaKey) && (e.key === '-' || e.key === '_')) {
+    } else if ((e.ctrlKey || e.metaKey) && (e.key === "-" || e.key === "_")) {
       e.preventDefault();
       updateZoom(zoomLevel - zoomStep);
-    } else if ((e.ctrlKey || e.metaKey) && e.key === '0') {
+    } else if ((e.ctrlKey || e.metaKey) && e.key === "0") {
       e.preventDefault();
-      updateZoom(1.0); // Reset to 100%
+      updateZoom(4.0); // Reset to 100% (which is 2x zoom)
     }
   });
 
-  // Set initial zoom to 200% (displays as 100%)
-  updateZoom(2.0);
+  // Set initial zoom to 2x (displays as 100%)
+  updateZoom(4.0);
 }
 
 /**
@@ -194,17 +206,20 @@ export function scrollToMovementBar(id) {
   }
 
   // Scroll the visualization container to bring bar into view
-  const visualizationContainer = document.querySelector('.timeline-visualization');
+  const visualizationContainer = document.querySelector(
+    ".timeline-visualization"
+  );
   const barRect = bar.getBoundingClientRect();
   const containerRect = visualizationContainer.getBoundingClientRect();
 
   // Calculate scroll position (horizontal scroll)
-  const scrollLeft = bar.offsetLeft - containerRect.width / 2 + bar.offsetWidth / 2;
-  visualizationContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+  const scrollLeft =
+    bar.offsetLeft - containerRect.width / 2 + bar.offsetWidth / 2;
+  visualizationContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
 
   // Flash effect
-  bar.style.animation = 'flash 1s ease';
+  bar.style.animation = "flash 1s ease";
   setTimeout(() => {
-    bar.style.animation = '';
+    bar.style.animation = "";
   }, 1000);
 }
